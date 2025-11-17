@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { ModeToggle } from "@/components/mode-toggle"
+import { ContactForm } from "@/components/contact-form"
 
 export default function Home() {
   return (
@@ -18,14 +19,14 @@ export default function Home() {
       
       {/* ---------------- HEADER ---------------- */}
       <header className="border-b bg-background/80 backdrop-blur sticky top-0 z-30">
-        <div className="max-w-5xl mx-auto flex items-center justify-between px-4 py-3 md:py-4">
+        <div className="max-w-5xl mx-auto flex items-center justify-between px-4 py-2 md:py-3">
 
           {/* 로고 */}
-          <a href="/" className="flex items-center gap-2">
+          <a href="/" className="flex items-center gap-3">
             <img
               src="/images/soopify-logo.png"
               alt="Soopify Logo"
-              className="h-9 w-auto md:h-11"
+              className="h-9 w-auto md:h-11"   // ← 핵심!
             />
             <span className="sr-only">Soopify</span>
           </a>
@@ -281,43 +282,8 @@ export default function Home() {
                 <li>• 희망 일정 / 연락처</li>
               </ul>
             </div>
-
-            <Card>
-              <CardContent className="p-6 space-y-4 text-[15px]">
-                
-                <div>
-                  <label className="block text-[12px] font-semibold text-muted-foreground mb-1">
-                    담당자 성함
-                  </label>
-                  <Input placeholder="이름" />
-                </div>
-
-                <div>
-                  <label className="block text-[12px] font-semibold text-muted-foreground mb-1">
-                    이메일 또는 연락처
-                  </label>
-                  <Input placeholder="example@company.kr / 010-0000-0000" />
-                </div>
-
-                <div>
-                  <label className="block text-[12px] font-semibold text-muted-foreground mb-1">
-                    기관 / 회사 / 학교명
-                  </label>
-                  <Input placeholder="○○나무병원 / ○○조경 / ○○초등학교 등" />
-                </div>
-
-                <div>
-                  <label className="block text-[12px] font-semibold text-muted-foreground mb-1">
-                    문의 내용
-                  </label>
-                  <Textarea rows={4} placeholder="문의 내용을 적어주세요." />
-                </div>
-
-                <Button className="w-full rounded-full py-2.5">문의 보내기</Button>
-              </CardContent>
-            </Card>
-
-          </div>
+             <ContactForm />
+            </div>
         </div>
       </section>
 
