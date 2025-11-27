@@ -7,9 +7,10 @@ import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
 
 const navItems = [
-  { href: "#services", label: "서비스" },
-  { href: "#workflow", label: "프로세스" },
-  { href: "#contact", label: "문의" },
+  { href: "/#services", label: "서비스" },
+  { href: "/#workflow", label: "프로세스" },
+  { href: "/board", label: "공지사항" },
+  { href: "/#contact", label: "문의" },
 ]
 
 export function SiteHeader() {
@@ -50,7 +51,7 @@ export function SiteHeader() {
               asChild
               className="rounded-full px-4 py-2 text-[13px] font-semibold"
             >
-              <a href="#contact">상담 요청</a>
+              <a href="/#contact">상담 요청</a>
             </Button>
             <ModeToggle />
           </div>
@@ -90,7 +91,7 @@ export function SiteHeader() {
               className="mt-2 w-full rounded-full py-2.5 text-[13px] font-semibold"
               onClick={close}
             >
-              <a href="#contact">상담 · 개발 의뢰</a>
+              <a href="/#contact">상담 · 개발 의뢰</a>
             </Button>
           </nav>
         </div>
