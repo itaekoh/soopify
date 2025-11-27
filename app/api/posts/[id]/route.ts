@@ -51,9 +51,10 @@ export async function PUT(
 
     const { id } = await params
     const body = await req.json()
-    const { title, content } = body as {
+    const { title, content, attachments } = body as {
       title?: string
       content?: string
+      attachments?: any[]
     }
 
     if (!title || !content) {
@@ -69,6 +70,7 @@ export async function PUT(
       .update({
         title,
         content,
+        attachments: attachments || [],
         updated_at: new Date().toISOString(),
       })
       .eq("id", id)

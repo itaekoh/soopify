@@ -26,11 +26,20 @@ export type ContactInquiry = {
   created_at?: string
 }
 
+export type Attachment = {
+  id: string
+  name: string
+  url: string
+  size: number
+  type: string
+}
+
 export type Post = {
   id?: string
   title: string
   content: string
   author: string
+  attachments?: Attachment[]
   created_at?: string
   updated_at?: string
 }

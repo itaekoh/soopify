@@ -24,19 +24,41 @@ export async function POST(req: Request) {
       )
     }
 
-    // 파일 유효성 검사
-    const maxSize = 5 * 1024 * 1024 // 5MB
-    if (file.size > maxSize) {
+    // 파일 타입 구분
+    const isImage = file.type.startsWith("image/")
+    const isDocument =
+      file.type === "application/pdf" ||
+      file.type === "application/msword" ||
+      file.type ===
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
+      file.type === "application/vnd.ms-excel" ||
+      file.type ===
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ||
+      file.type === "application/vnd.ms-powerpoint" ||
+      file.type ===
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation" ||
+      file.type === "text/plain" ||
+      file.type === "application/zip" ||
+      file.type === "application/x-zip-compressed"
+
+    if (!isImage && !isDocument) {
       return NextResponse.json(
-        { ok: false, error: "파일 크기는 5MB 이하여야 합니다." },
+        {
+          ok: false,
+          error: "지원하지 않는 파일 형식입니다. (이미지, PDF, DOC, XLS, PPT, TXT, ZIP만 가능)",
+        },
         { status: 400 },
       )
     }
 
-    const allowedTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"]
-    if (!allowedTypes.includes(file.type)) {
+    // 파일 크기 검사 (이미지: 5MB, 문서: 10MB)
+    const maxSize = isImage ? 5 * 1024 * 1024 : 10 * 1024 * 1024
+    if (file.size > maxSize) {
       return NextResponse.json(
-        { ok: false, error: "지원하지 않는 파일 형식입니다." },
+        {
+          ok: false,
+          error: `파일 크기는 ${isImage ? "5MB" : "10MB"} 이하여야 합니다.`,
+        },
         { status: 400 },
       )
     }
@@ -51,9 +73,12 @@ export async function POST(req: Request) {
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
 
+    // 저장소 버킷 선택 (이미지: post-images, 문서: post-files)
+    const bucketName = isImage ? "post-images" : "post-files"
+
     // Supabase Storage에 업로드
     const { data, error } = await supabaseAdmin.storage
-      .from("post-images")
+      .from(bucketName)
       .upload(fileName, buffer, {
         contentType: file.type,
         upsert: false,
@@ -62,7 +87,7 @@ export async function POST(req: Request) {
     if (error) {
       console.error("Supabase Storage error:", error)
       return NextResponse.json(
-        { ok: false, error: "이미지 업로드에 실패했습니다." },
+        { ok: false, error: "파일 업로드에 실패했습니다." },
         { status: 500 },
       )
     }
@@ -70,11 +95,14 @@ export async function POST(req: Request) {
     // 공개 URL 가져오기
     const {
       data: { publicUrl },
-    } = supabaseAdmin.storage.from("post-images").getPublicUrl(fileName)
+    } = supabaseAdmin.storage.from(bucketName).getPublicUrl(fileName)
 
     return NextResponse.json({
       ok: true,
       location: publicUrl,
+      fileName: file.name,
+      fileSize: file.size,
+      fileType: file.type,
     })
   } catch (e) {
     console.error("Upload API error:", e)

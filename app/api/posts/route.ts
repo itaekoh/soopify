@@ -54,10 +54,11 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json()
-    const { title, content, author } = body as {
+    const { title, content, author, attachments } = body as {
       title?: string
       content?: string
       author?: string
+      attachments?: any[]
     }
 
     if (!title || !content || !author) {
@@ -74,6 +75,7 @@ export async function POST(req: Request) {
         title,
         content,
         author,
+        attachments: attachments || [],
       })
       .select()
       .single()
