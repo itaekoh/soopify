@@ -9,8 +9,8 @@ import { ModeToggle } from "@/components/mode-toggle"
 const navItems = [
   { href: "/#services", label: "서비스" },
   { href: "/#workflow", label: "프로세스" },
-  { href: "/board", label: "공지사항" },
   { href: "/#contact", label: "문의" },
+  { href: "/board", label: "공지사항" },
 ]
 
 export function SiteHeader() {
