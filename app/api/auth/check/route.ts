@@ -5,7 +5,14 @@ import { isAuthenticated } from "@/lib/auth"
 export async function GET() {
   try {
     const authenticated = await isAuthenticated()
-    return NextResponse.json({ ok: true, authenticated })
+    return NextResponse.json(
+      { ok: true, authenticated },
+      {
+        headers: {
+          "Cache-Control": "private, max-age=300",
+        },
+      },
+    )
   } catch (e) {
     console.error("Auth check error:", e)
     return NextResponse.json(

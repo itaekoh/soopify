@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { useAuth } from "@/contexts/auth-context"
 
 type Post = {
   id: string
@@ -19,34 +20,25 @@ type Post = {
 
 export function BoardList() {
   const router = useRouter()
+  const { authenticated } = useAuth()
   const [posts, setPosts] = useState<Post[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [page, setPage] = useState(1)
   const [total, setTotal] = useState(0)
-  const [authenticated, setAuthenticated] = useState(false)
 
   const limit = 10
 
   useEffect(() => {
     fetchPosts()
-    checkAuth()
   }, [page])
-
-  async function checkAuth() {
-    try {
-      const res = await fetch("/api/auth/check")
-      const data = await res.json()
-      setAuthenticated(data.authenticated || false)
-    } catch (err) {
-      setAuthenticated(false)
-    }
-  }
 
   async function fetchPosts() {
     try {
       setLoading(true)
-      const res = await fetch(`/api/posts?page=${page}&limit=${limit}`)
+      const res = await fetch(`/api/posts?page=${page}&limit=${limit}`, {
+        next: { revalidate: 30 },
+      })
       const data = await res.json()
 
       if (!res.ok || !data.ok) {

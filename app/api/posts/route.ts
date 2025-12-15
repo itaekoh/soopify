@@ -25,13 +25,20 @@ export async function GET(req: Request) {
       )
     }
 
-    return NextResponse.json({
-      ok: true,
-      posts: data,
-      total: count,
-      page,
-      limit,
-    })
+    return NextResponse.json(
+      {
+        ok: true,
+        posts: data,
+        total: count,
+        page,
+        limit,
+      },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=30, stale-while-revalidate=60",
+        },
+      },
+    )
   } catch (e) {
     console.error("Posts API error:", e)
     return NextResponse.json(

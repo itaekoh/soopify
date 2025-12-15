@@ -24,7 +24,14 @@ export async function GET(
       )
     }
 
-    return NextResponse.json({ ok: true, post: data })
+    return NextResponse.json(
+      { ok: true, post: data },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
+        },
+      },
+    )
   } catch (e) {
     console.error("Post API error:", e)
     return NextResponse.json(

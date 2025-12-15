@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Attachment } from "@/lib/supabase"
 import { FileText, Download } from "lucide-react"
+import { useAuth } from "@/contexts/auth-context"
 
 type Post = {
   id: string
@@ -22,31 +23,22 @@ type Post = {
 export default function PostDetailPage() {
   const params = useParams()
   const router = useRouter()
+  const { authenticated } = useAuth()
   const [post, setPost] = useState<Post | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [authenticated, setAuthenticated] = useState(false)
   const [deleting, setDeleting] = useState(false)
 
   useEffect(() => {
     fetchPost()
-    checkAuth()
   }, [params.id])
-
-  async function checkAuth() {
-    try {
-      const res = await fetch("/api/auth/check")
-      const data = await res.json()
-      setAuthenticated(data.authenticated || false)
-    } catch (err) {
-      setAuthenticated(false)
-    }
-  }
 
   async function fetchPost() {
     try {
       setLoading(true)
-      const res = await fetch(`/api/posts/${params.id}`)
+      const res = await fetch(`/api/posts/${params.id}`, {
+        next: { revalidate: 60 },
+      })
       const data = await res.json()
 
       if (!res.ok || !data.ok) {
@@ -155,7 +147,7 @@ export default function PostDetailPage() {
             </CardHeader>
             <CardContent>
               <div
-                className="prose dark:prose-invert max-w-none"
+                className="post-content"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
 
