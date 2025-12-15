@@ -13,7 +13,7 @@ export async function GET(req: Request) {
 
     const { data, error, count } = await supabase
       .from("posts")
-      .select("*", { count: "exact" })
+      .select("id, created_at, title, author, content", { count: "exact" })
       .order("created_at", { ascending: false })
       .range(offset, offset + limit - 1)
 

@@ -71,7 +71,6 @@ export async function POST(req: Request) {
 
     // 파일을 ArrayBuffer로 변환
     const arrayBuffer = await file.arrayBuffer()
-    const buffer = Buffer.from(arrayBuffer)
 
     // 저장소 버킷 선택 (이미지: post-images, 문서: post-files)
     const bucketName = isImage ? "post-images" : "post-files"
@@ -79,7 +78,7 @@ export async function POST(req: Request) {
     // Supabase Storage에 업로드
     const { data, error } = await supabaseAdmin.storage
       .from(bucketName)
-      .upload(fileName, buffer, {
+      .upload(fileName, arrayBuffer, {
         contentType: file.type,
         upsert: false,
       })
