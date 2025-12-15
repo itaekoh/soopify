@@ -81,13 +81,19 @@
 
 /* 공지사항 콘텐츠 스타일 */
 .post-content {
-  color: hsl(var(--foreground));
   line-height: 1.75;
 }
 
-/* 다크모드에서 모든 텍스트 색상을 명확하게 오버라이드 */
+/* 다크모드/라이트모드 모두 부드러운 텍스트 색상 */
 .post-content * {
-  color: hsl(var(--foreground)) !important;
+  color: inherit;
+}
+
+.post-content p,
+.post-content li,
+.post-content span,
+.post-content div {
+  color: hsl(var(--muted-foreground));
 }
 
 .post-content h1 {
@@ -96,6 +102,7 @@
   margin-top: 0;
   margin-bottom: 0.8888889em;
   line-height: 1.1111111;
+  color: hsl(var(--foreground));
 }
 
 .post-content h2 {
@@ -104,6 +111,7 @@
   margin-top: 1.5555556em;
   margin-bottom: 0.8888889em;
   line-height: 1.3333333;
+  color: hsl(var(--foreground));
 }
 
 .post-content h3 {
@@ -112,6 +120,7 @@
   margin-top: 1.6em;
   margin-bottom: 0.6em;
   line-height: 1.6;
+  color: hsl(var(--foreground));
 }
 
 .post-content h4 {
@@ -120,6 +129,7 @@
   margin-top: 1.5em;
   margin-bottom: 0.5em;
   line-height: 1.5;
+  color: hsl(var(--foreground));
 }
 
 .post-content h5 {
@@ -128,6 +138,7 @@
   margin-top: 1.5555556em;
   margin-bottom: 0.4444444em;
   line-height: 1.5555556;
+  color: hsl(var(--foreground));
 }
 
 .post-content h6 {
@@ -136,6 +147,7 @@
   margin-top: 1.7777778em;
   margin-bottom: 0.4444444em;
   line-height: 1.5555556;
+  color: hsl(var(--foreground));
 }
 
 .post-content p {
@@ -144,7 +156,7 @@
 }
 
 .post-content a {
-  color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary));
   text-decoration: underline;
   font-weight: 500;
 }
@@ -155,6 +167,7 @@
 
 .post-content strong {
   font-weight: 600;
+  color: hsl(var(--foreground));
 }
 
 .post-content ul,
@@ -177,9 +190,9 @@
   border-radius: 0.5rem;
 }
 
-/* 작은 텍스트도 충분히 보이도록 최소 불투명도 보장 */
+/* 작은 텍스트 스타일 */
 .post-content small,
 .post-content .text-sm,
 .post-content .text-xs {
-  opacity: 0.95;
+  color: hsl(var(--muted-foreground));
 }
