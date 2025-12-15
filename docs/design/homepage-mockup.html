@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soopify - 통합 플랫폼 디자인 시안</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; }
+        .gradient-green { background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- 상단 안내 배너 -->
+    <div class="bg-primary-600 text-white text-center py-2 text-sm">
+        🎉 DocNamu와 Soopify가 통합되었습니다! 더 강력한 서비스로 찾아뵙겠습니다.
+    </div>
+
+    <!-- 헤더 -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- 로고 -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 gradient-green rounded-lg flex items-center justify-center">
+                        <span class="text-white text-xl font-bold">🌳</span>
+                    </div>
+                    <span class="text-2xl font-bold text-gray-900">Soopify</span>
+                    <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded-full">NEW</span>
+                </div>
+
+                <!-- 데스크톱 메뉴 -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-gray-700 hover:text-primary-600 font-medium">홈</a>
+                    <a href="#services" class="text-gray-700 hover:text-primary-600 font-medium">서비스</a>
+                    <a href="#community" class="text-gray-700 hover:text-primary-600 font-medium">커뮤니티</a>
+                    <a href="#dashboard" class="text-gray-700 hover:text-primary-600 font-medium">전국 현황</a>
+                    <a href="#info" class="text-gray-700 hover:text-primary-600 font-medium">정보센터</a>
+                </div>
+
+                <!-- 우측 버튼 -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="text-gray-700 hover:text-primary-600 font-medium">로그인</button>
+                    <button class="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition">
+                        회원가입
+                    </button>
+                </div>
+
+                <!-- 모바일 메뉴 버튼 -->
+                <button class="md:hidden">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden">
+        <div class="absolute inset-0 gradient-green opacity-10"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 relative">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- 좌측: 텍스트 -->
+                <div class="space-y-8">
+                    <div class="inline-flex items-center space-x-2 bg-white rounded-full px-4 py-2 shadow-sm">
+                        <span class="text-primary-600 font-semibold text-sm">생활권 수목 관리 × 나무의사 커뮤니티</span>
+                    </div>
+
+                    <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
+                        나무와 사람을<br/>
+                        <span class="text-primary-600">연결하는</span><br/>
+                        통합 플랫폼
+                    </h1>
+
+                    <p class="text-xl text-gray-600 leading-relaxed">
+                        전국 1,737명의 나무의사와 함께하는<br/>
+                        전문가 커뮤니티 + 수목 관리 비즈니스 서비스
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <button class="bg-primary-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary-700 transition shadow-lg">
+                            커뮤니티 둘러보기
+                        </button>
+                        <button class="bg-white text-gray-700 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition border-2 border-gray-200">
+                            서비스 상담
+                        </button>
+                    </div>
+
+                    <!-- 통계 -->
+                    <div class="flex flex-wrap gap-8 pt-4">
+                        <div>
+                            <div class="text-3xl font-bold text-gray-900">1,737+</div>
+                            <div class="text-sm text-gray-600">나무의사</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-gray-900">800+</div>
+                            <div class="text-sm text-gray-600">나무병원</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-gray-900">5,000+</div>
+                            <div class="text-sm text-gray-600">전국 보호수</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 우측: 비주얼 -->
+                <div class="relative">
+                    <div class="bg-white rounded-2xl shadow-2xl p-8 space-y-4">
+                        <!-- 미니 카드들 -->
+                        <div class="bg-primary-50 rounded-lg p-4 border-l-4 border-primary-600">
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold text-gray-900">💬 토론 게시판</span>
+                                <span class="text-primary-600 text-sm">124개 활성</span>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-600">
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold text-gray-900">📊 전국 현황</span>
+                                <span class="text-blue-600 text-sm">실시간 업데이트</span>
+                            </div>
+                        </div>
+                        <div class="bg-amber-50 rounded-lg p-4 border-l-4 border-amber-600">
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold text-gray-900">🎓 교육 정보</span>
+                                <span class="text-amber-600 text-sm">15개 과정</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 장식 요소 -->
+                    <div class="absolute -top-4 -right-4 w-24 h-24 bg-primary-200 rounded-full opacity-50"></div>
+                    <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-green-200 rounded-full opacity-30"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 서비스 Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    무엇을 도와드리나요?
+                </h2>
+                <p class="text-xl text-gray-600">
+                    생활권 수목 관리부터 전문가 네트워킹까지
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- 서비스 카드 1 -->
+                <div class="bg-white rounded-2xl border-2 border-gray-200 p-8 card-hover">
+                    <div class="w-16 h-16 gradient-green rounded-xl flex items-center justify-center mb-6">
+                        <span class="text-3xl">🌳</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">수목 조사·관리</h3>
+                    <p class="text-gray-600 mb-6">
+                        현장조사, 사진, 위치 기록을 쉽게! 보고서도 자동화.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <span class="text-primary-600 mr-2">✓</span>
+                            <span class="text-gray-700">조사 양식 디지털화</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-primary-600 mr-2">✓</span>
+                            <span class="text-gray-700">수목·이력 관리</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-primary-600 mr-2">✓</span>
+                            <span class="text-gray-700">보고서 초안 자동 생성</span>
+                        </li>
+                    </ul>
+                    <span class="inline-block bg-primary-100 text-primary-700 text-sm px-3 py-1 rounded-full">
+                        Beta 개발 중
+                    </span>
+                </div>
+
+                <!-- 서비스 카드 2 -->
+                <div class="bg-white rounded-2xl border-2 border-gray-200 p-8 card-hover">
+                    <div class="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center mb-6">
+                        <span class="text-3xl">💼</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">생활권 컨설팅</h3>
+                    <p class="text-gray-600 mb-6">
+                        학교·아파트·공원 등 생활권 수목 현황 조사 및 정리
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">✓</span>
+                            <span class="text-gray-700">수목 조사 및 목록화</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">✓</span>
+                            <span class="text-gray-700">우선 관리 대상 도출</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">✓</span>
+                            <span class="text-gray-700">안내판·수목지도 제안</span>
+                        </li>
+                    </ul>
+                    <span class="inline-block bg-blue-100 text-blue-700 text-sm px-3 py-1 rounded-full">
+                        서울권 중심
+                    </span>
+                </div>
+
+                <!-- 서비스 카드 3 -->
+                <div class="bg-white rounded-2xl border-2 border-gray-200 p-8 card-hover">
+                    <div class="w-16 h-16 bg-amber-600 rounded-xl flex items-center justify-center mb-6">
+                        <span class="text-3xl">💻</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">시스템 개발</h3>
+                    <p class="text-gray-600 mb-6">
+                        나무병원·조경 회사 홈페이지 및 업무 시스템 맞춤 제작
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <span class="text-amber-600 mr-2">✓</span>
+                            <span class="text-gray-700">기업 소개형 홈페이지</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-amber-600 mr-2">✓</span>
+                            <span class="text-gray-700">상담·접수·예약 기능</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-amber-600 mr-2">✓</span>
+                            <span class="text-gray-700">내부 업무 시스템 개발</span>
+                        </li>
+                    </ul>
+                    <span class="inline-block bg-amber-100 text-amber-700 text-sm px-3 py-1 rounded-full">
+                        프로젝트 단위
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 커뮤니티 Section -->
+    <section id="community" class="py-20 bg-gradient-to-br from-primary-50 to-green-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- 좌측: 설명 -->
+                <div class="space-y-6">
+                    <div class="inline-block bg-primary-600 text-white text-sm px-4 py-2 rounded-full">
+                        NEW! DocNamu 통합
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+                        나무의사 전문가<br/>커뮤니티
+                    </h2>
+                    <p class="text-xl text-gray-600">
+                        전국 1,737명의 나무의사가 모이는 곳<br/>
+                        실무 경험과 전문 지식을 공유합니다
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-2xl">💬</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1">토론 게시판</h4>
+                                <p class="text-gray-600">StackOverflow 스타일 Q&A, 투표, 답변 채택</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-2xl">🏆</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1">전문가 인증</h4>
+                                <p class="text-gray-600">나무의사 자격 인증으로 신뢰성 확보</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-2xl">🔍</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1">지식 아카이브</h4>
+                                <p class="text-gray-600">태그, 카테고리별 체계적 분류 및 검색</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="bg-primary-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary-700 transition">
+                        커뮤니티 시작하기 →
+                    </button>
+                </div>
+
+                <!-- 우측: 미리보기 -->
+                <div class="bg-white rounded-2xl shadow-2xl p-6 space-y-4">
+                    <div class="flex items-center justify-between border-b pb-4">
+                        <h4 class="font-bold text-gray-900">최근 토론</h4>
+                        <span class="text-primary-600 text-sm">전체보기 →</span>
+                    </div>
+
+                    <!-- 게시글 미리보기 -->
+                    <div class="space-y-3">
+                        <div class="border border-gray-200 rounded-lg p-4 hover:border-primary-300 transition cursor-pointer">
+                            <div class="flex items-start justify-between mb-2">
+                                <h5 class="font-semibold text-gray-900 flex-1">소나무 잎마름병 진단 방법이 궁금합니다</h5>
+                                <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">질문</span>
+                            </div>
+                            <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                <span>👍 12</span>
+                                <span>💬 8</span>
+                                <span>👁️ 234</span>
+                                <span>2시간 전</span>
+                            </div>
+                        </div>
+
+                        <div class="border border-gray-200 rounded-lg p-4 hover:border-primary-300 transition cursor-pointer">
+                            <div class="flex items-start justify-between mb-2">
+                                <h5 class="font-semibold text-gray-900 flex-1">2025년 병해충 방제 가이드 공유</h5>
+                                <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">공유</span>
+                            </div>
+                            <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                <span>👍 45</span>
+                                <span>💬 12</span>
+                                <span>👁️ 567</span>
+                                <span>1일 전</span>
+                            </div>
+                        </div>
+
+                        <div class="border border-gray-200 rounded-lg p-4 hover:border-primary-300 transition cursor-pointer">
+                            <div class="flex items-start justify-between mb-2">
+                                <h5 class="font-semibold text-gray-900 flex-1">천공충 피해 대응 방안 토론</h5>
+                                <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded">토론</span>
+                            </div>
+                            <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                <span>👍 23</span>
+                                <span>💬 15</span>
+                                <span>👁️ 432</span>
+                                <span>3일 전</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 전국 현황 Section -->
+    <section id="dashboard" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    전국 현황 대시보드
+                </h2>
+                <p class="text-xl text-gray-600">
+                    실시간 업데이트되는 나무병원 및 보호수 정보
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- 나무병원 현황 -->
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900">🏥 나무병원 현황</h3>
+                        <span class="bg-white text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            800개 기관
+                        </span>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 mb-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-gray-600">지역별 분포</span>
+                            <button class="text-blue-600 text-sm">상세보기 →</button>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700">경기도</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="h-full bg-blue-600 rounded-full" style="width: 85%"></div>
+                                    </div>
+                                    <span class="text-sm font-semibold">215</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700">서울</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="h-full bg-blue-600 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                    <span class="text-sm font-semibold">152</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700">경상남도</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="h-full bg-blue-600 rounded-full" style="width: 45%"></div>
+                                    </div>
+                                    <span class="text-sm font-semibold">98</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+                        전국 지도 보기
+                    </button>
+                </div>
+
+                <!-- 보호수 현황 -->
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900">🌲 보호수 현황</h3>
+                        <span class="bg-white text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            5,234그루
+                        </span>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 mb-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-gray-600">수종별 분포</span>
+                            <button class="text-green-600 text-sm">상세보기 →</button>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700">느티나무</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="h-full bg-green-600 rounded-full" style="width: 90%"></div>
+                                    </div>
+                                    <span class="text-sm font-semibold">1,856</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700">은행나무</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="h-full bg-green-600 rounded-full" style="width: 55%"></div>
+                                    </div>
+                                    <span class="text-sm font-semibold">1,023</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700">소나무</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="h-full bg-green-600 rounded-full" style="width: 40%"></div>
+                                    </div>
+                                    <span class="text-sm font-semibold">789</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-semibold">
+                        보호수 지도 보기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 gradient-green">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                나무와 사람을 연결합니다
+            </h2>
+            <p class="text-xl text-white/90 mb-8">
+                전문가 네트워크와 실무 도구가 만나는 통합 플랫폼<br/>
+                지금 바로 시작하세요
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="bg-white text-primary-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition shadow-lg">
+                    무료로 시작하기
+                </button>
+                <button class="bg-primary-800 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary-900 transition">
+                    서비스 문의
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 gradient-green rounded-lg flex items-center justify-center">
+                            <span class="text-white text-lg">🌳</span>
+                        </div>
+                        <span class="text-xl font-bold text-white">Soopify</span>
+                    </div>
+                    <p class="text-sm">
+                        생활권 수목 관리와<br/>
+                        나무의사 커뮤니티의 통합
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white mb-4">서비스</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white">수목 조사·관리</a></li>
+                        <li><a href="#" class="hover:text-white">생활권 컨설팅</a></li>
+                        <li><a href="#" class="hover:text-white">시스템 개발</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white mb-4">커뮤니티</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white">토론 게시판</a></li>
+                        <li><a href="#" class="hover:text-white">Q&A</a></li>
+                        <li><a href="#" class="hover:text-white">전문가 찾기</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white mb-4">정보</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white">공지사항</a></li>
+                        <li><a href="#" class="hover:text-white">교육 정보</a></li>
+                        <li><a href="#" class="hover:text-white">이용약관</a></li>
+                        <li><a href="#" class="hover:text-white">개인정보처리방침</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm">© 2025 Soopify. All rights reserved.</p>
+                <p class="text-sm text-gray-400">
+                    DocNamu + Soopify 통합 플랫폼
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
