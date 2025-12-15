@@ -79,16 +79,29 @@
   }
 }
 
-/* 공지사항 콘텐츠 스타일 - 레이아웃만 조정, 색상은 페이지 기본 스타일 따름 */
+/* 공지사항 콘텐츠 스타일 */
 .post-content {
   line-height: 1.75;
+  color: hsl(var(--muted-foreground));
 }
 
-/* TinyMCE inline style 오버라이드 - 다크모드 가독성 */
+/* TinyMCE inline style 오버라이드 - 다른 페이지와 동일한 회색톤 */
 .post-content p[style*="color"],
 .post-content span[style*="color"],
-.post-content div[style*="color"] {
-  color: inherit !important;
+.post-content div[style*="color"],
+.post-content p,
+.post-content li,
+.post-content span:not(a):not(strong) {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+  color: hsl(var(--foreground)) !important;
 }
 
 .post-content h1 {
@@ -155,6 +168,7 @@
 
 .post-content strong {
   font-weight: 600;
+  color: hsl(var(--foreground)) !important;
 }
 
 .post-content ul,
