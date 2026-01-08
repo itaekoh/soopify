@@ -91,6 +91,7 @@ export default function Home() {
                   <span className="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-800 dark:bg-slate-900 dark:text-slate-100">공공·지자체</span>
                   <span className="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-800 dark:bg-slate-900 dark:text-slate-100">아파트 단지</span>
                   <span className="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-800 dark:bg-slate-900 dark:text-slate-100">가로수</span>
+                  <span className="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-800 dark:bg-slate-900 dark:text-slate-100">공원</span>
                 </div>
               </div>
 
