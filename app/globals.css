@@ -75,7 +75,7 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply antialiased;
   }
 }
 
@@ -189,4 +189,126 @@
   max-width: 100%;
   height: auto;
   border-radius: 0.5rem;
+}
+
+/* ========================================
+   Soopify V20 Homepage Styles
+   ======================================== */
+@layer utilities {
+  :root {
+    scroll-behavior: smooth;
+  }
+
+  section {
+    scroll-margin-top: 92px;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .tone-unify {
+    filter: saturate(.9) contrast(1.05) brightness(.95);
+  }
+
+  /* Hero media normalization */
+  .hero-media-lg {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: auto !important;
+    height: var(--hero-lg-h);
+  }
+
+  .hero-media-sm {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: auto !important;
+    height: var(--hero-sm-h);
+  }
+
+  .hero-media-lg > img,
+  .hero-media-sm > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-media-lg::after,
+  .hero-media-sm::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(2,6,23,0) 0%, rgba(2,6,23,0.18) 55%, rgba(2,6,23,0.45) 100%);
+  }
+
+  html:not(.dark) .hero-media-lg::after,
+  html:not(.dark) .hero-media-sm::after {
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(2,6,23,0.08) 65%, rgba(2,6,23,0.22) 100%);
+  }
+
+  @media (max-width: 640px) {
+    .hero-media-lg { height: var(--hero-lg-h-mobile); }
+    .hero-media-sm { height: var(--hero-sm-h-mobile); }
+  }
+
+  /* Image height normalization (Hero / Services / Case Studies) */
+  :root {
+    --hero-lg-h: 320px;
+    --hero-sm-h: 180px;
+    --hero-lg-h-mobile: 240px;
+    --hero-sm-h-mobile: 140px;
+    --svc-img-h: 210px;
+    --case-img-h: 210px;
+    --svc-img-h-mobile: 160px;
+    --case-img-h-mobile: 160px;
+  }
+
+  /* Apply fixed heights regardless of source image proportions */
+  .svc-grid .aspect-\[16\/10\],
+  .case-grid .aspect-\[16\/10\] {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: auto !important;
+    height: var(--svc-img-h);
+  }
+
+  /* Cases can use different height if you want */
+  .case-grid .aspect-\[16\/10\] {
+    height: var(--case-img-h);
+  }
+
+  .svc-grid .aspect-\[16\/10\] > img,
+  .case-grid .aspect-\[16\/10\] > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Subtle readability overlay for text below */
+  .svc-grid .aspect-\[16\/10\]::after,
+  .case-grid .aspect-\[16\/10\]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(2,6,23,0) 0%, rgba(2,6,23,0.18) 55%, rgba(2,6,23,0.45) 100%);
+  }
+
+  /* Light mode: softer overlay */
+  html:not(.dark) .svc-grid .aspect-\[16\/10\]::after,
+  html:not(.dark) .case-grid .aspect-\[16\/10\]::after {
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(2,6,23,0.08) 65%, rgba(2,6,23,0.22) 100%);
+  }
+
+  /* Mobile: reduce image height */
+  @media (max-width: 640px) {
+    .svc-grid .aspect-\[16\/10\] { height: var(--svc-img-h-mobile); }
+    .case-grid .aspect-\[16\/10\] { height: var(--case-img-h-mobile); }
+  }
 }

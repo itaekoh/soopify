@@ -3,12 +3,10 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import Link from "next/link"
-import { SiteHeader } from "@/components/site-header"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { AdminHeader } from "@/components/admin-header"
+import { V20ClientScripts } from "@/components/v20-client-scripts"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft } from "lucide-react"
+import { Mail, Building, MessageSquare, Calendar, ChevronLeft, ChevronRight } from "lucide-react"
 
 type Inquiry = {
   id: string
@@ -91,14 +89,15 @@ export default function InquiriesPage() {
 
   if (checking) {
     return (
-      <>
-        <SiteHeader />
-        <main className="min-h-screen bg-background">
-          <div className="max-w-5xl mx-auto px-4 py-14">
-            <p className="text-center text-muted-foreground">인증 확인 중...</p>
+      <div className="bg-white text-slate-950 dark:bg-slate-950 dark:text-slate-50">
+        <V20ClientScripts />
+        <AdminHeader />
+        <main className="min-h-screen">
+          <div className="max-w-6xl mx-auto px-4 py-20">
+            <p className="text-center text-slate-600 dark:text-slate-300">인증 확인 중...</p>
           </div>
         </main>
-      </>
+      </div>
     )
   }
 
@@ -109,113 +108,113 @@ export default function InquiriesPage() {
   const totalPages = Math.ceil(total / limit)
 
   return (
-    <>
-      <SiteHeader />
-      <main className="min-h-screen bg-background">
-        <div className="max-w-5xl mx-auto px-4 py-14 md:py-16">
-          <div className="mb-6">
-            <Button variant="outline" asChild>
-              <Link href="/admin">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                대시보드로
-              </Link>
-            </Button>
-          </div>
-
-          <header className="mb-8 space-y-2">
-            <h1 className="text-3xl font-bold">상담 문의 관리</h1>
-            <p className="text-muted-foreground text-[15px]">
-              총 {total}건의 문의가 있습니다.
+    <div className="bg-white text-slate-950 dark:bg-slate-950 dark:text-slate-50">
+      <V20ClientScripts />
+      <AdminHeader />
+      <main className="min-h-screen">
+        <div className="max-w-6xl mx-auto px-4 py-14 md:py-20">
+          <div className="mb-12">
+            <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">상담 문의 관리</h1>
+            <p className="text-lg text-slate-700 dark:text-slate-200 mt-4">
+              총 <Badge variant="secondary">{total}</Badge>건의 문의가 있습니다.
             </p>
-          </header>
+          </div>
 
           {loading ? (
             <div className="text-center py-12">
-              <p className="text-muted-foreground">로딩 중...</p>
+              <p className="text-slate-600 dark:text-slate-300">로딩 중...</p>
             </div>
           ) : error ? (
-            <div className="text-center py-12">
+            <div className="rounded-3xl border border-red-200 bg-red-50 p-12 text-center dark:border-red-900 dark:bg-red-950/20">
               <p className="text-red-600 dark:text-red-400">{error}</p>
             </div>
           ) : inquiries.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground mb-4">문의가 없습니다.</p>
+            <div className="rounded-3xl border border-slate-200 bg-white p-12 text-center dark:border-slate-800 dark:bg-slate-950">
+              <p className="text-slate-600 dark:text-slate-300 mb-4">문의가 없습니다.</p>
               <Badge variant="outline">아직 접수된 문의가 없습니다.</Badge>
             </div>
           ) : (
             <>
               <div className="space-y-4">
                 {inquiries.map((inquiry) => (
-                  <Card key={inquiry.id}>
-                    <CardHeader className="pb-3">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <CardTitle className="text-lg">
-                            {inquiry.name}
-                            {inquiry.org && (
-                              <span className="text-sm font-normal text-muted-foreground ml-2">
-                                ({inquiry.org})
-                              </span>
-                            )}
-                          </CardTitle>
-                          <p className="text-sm text-muted-foreground mt-1">
-                            {inquiry.contact}
-                          </p>
+                  <article key={inquiry.id} className="rounded-3xl border border-slate-200 bg-white p-6 transition hover:border-slate-300 hover:shadow-lg dark:border-slate-800 dark:bg-slate-950 dark:hover:border-slate-700">
+                    <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-start">
+                      <div className="flex-1 space-y-3">
+                        <div className="flex items-center gap-2">
+                          <h3 className="text-lg font-semibold">{inquiry.name}</h3>
+                          {inquiry.org && (
+                            <Badge variant="outline" className="text-xs">
+                              <Building className="h-3 w-3 mr-1" />
+                              {inquiry.org}
+                            </Badge>
+                          )}
                         </div>
-                        <Badge variant="outline" className="text-xs">
+                        <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
+                          <Mail className="h-4 w-4" />
+                          {inquiry.contact}
+                        </div>
+                        <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                          <Calendar className="h-3 w-3" />
                           {formatDate(inquiry.created_at)}
-                        </Badge>
+                        </div>
                       </div>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="bg-muted p-4 rounded-md">
-                        <p className="text-sm whitespace-pre-wrap leading-relaxed">
-                          {inquiry.message}
-                        </p>
+                    </div>
+                    <div className="mt-4 rounded-2xl bg-slate-50 p-4 dark:bg-slate-900/50">
+                      <div className="flex items-start gap-2 mb-2">
+                        <MessageSquare className="h-4 w-4 text-slate-500 dark:text-slate-400 mt-0.5" />
+                        <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">문의 내용</p>
                       </div>
-                    </CardContent>
-                  </Card>
+                      <p className="text-sm whitespace-pre-wrap leading-relaxed text-slate-600 dark:text-slate-300 pl-6">
+                        {inquiry.message}
+                      </p>
+                    </div>
+                  </article>
                 ))}
               </div>
 
               {/* 페이지네이션 */}
               {totalPages > 1 && (
-                <div className="flex justify-center gap-2 mt-6">
-                  <Button
-                    variant="outline"
+                <div className="flex justify-center items-center gap-2 mt-8">
+                  <button
                     onClick={() => setPage((p) => Math.max(1, p - 1))}
                     disabled={page === 1}
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200 dark:hover:bg-slate-900"
                   >
+                    <ChevronLeft className="h-4 w-4" />
                     이전
-                  </Button>
+                  </button>
                   <div className="flex items-center gap-2">
                     {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
                       const pageNum = i + 1
                       return (
-                        <Button
+                        <button
                           key={pageNum}
-                          variant={pageNum === page ? "default" : "outline"}
                           onClick={() => setPage(pageNum)}
-                          className="w-10"
+                          className={`inline-flex h-10 w-10 items-center justify-center rounded-2xl text-sm font-semibold transition ${
+                            pageNum === page
+                              ? "bg-slate-950 text-white dark:bg-white dark:text-slate-950"
+                              : "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200 dark:hover:bg-slate-900"
+                          }`}
                         >
                           {pageNum}
-                        </Button>
+                        </button>
                       )
                     })}
                   </div>
-                  <Button
-                    variant="outline"
+                  <button
                     onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                     disabled={page === totalPages}
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200 dark:hover:bg-slate-900"
                   >
                     다음
-                  </Button>
+                    <ChevronRight className="h-4 w-4" />
+                  </button>
                 </div>
               )}
             </>
           )}
         </div>
       </main>
-    </>
+    </div>
   )
 }
