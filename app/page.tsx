@@ -61,7 +61,7 @@ export default function Home() {
         {/* HERO */}
         <section className="relative h-[90vh] min-h-[600px] overflow-hidden">
           <img
-            src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=90"
+            src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2400&q=90"
             alt="Forest"
             className="absolute inset-0 h-full w-full object-cover"
           />
@@ -180,7 +180,7 @@ function CredentialsSection() {
 
 function ProductsSection() {
   return (
-    <section id="products">
+    <section id="products" className="mt-20 md:mt-28">
       {/* Soopsite */}
       <div className="grid grid-cols-1 md:grid-cols-2">
         <div className="relative aspect-[4/3] md:aspect-auto">
