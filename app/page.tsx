@@ -130,44 +130,53 @@ export default function Home() {
 
 function CredentialsSection() {
   return (
-    <section className="border-t border-slate-200 py-16 dark:border-slate-800">
-      <div className="mx-auto max-w-6xl px-4">
-        <div className="max-w-3xl">
-          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">나무의사 이력</h2>
-          <p className="mt-4 text-lg text-slate-700 dark:text-slate-200">
-            현장 경험에서 출발한 도구입니다.
-          </p>
+    <section className="relative overflow-hidden bg-slate-950 py-20 text-white">
+      <img
+        src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=2400&q=80"
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover opacity-20"
+      />
+      <div className="relative mx-auto max-w-6xl px-4">
+        <div className="mb-12 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-white/50">Experience</p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">나무의사 이력</h2>
+          <p className="mt-3 text-white/60">현장 경험에서 출발한 도구입니다.</p>
         </div>
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
-          <article className="rounded-3xl border border-slate-200 bg-white p-8 dark:border-slate-800 dark:bg-slate-950">
-            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">2024.05 – 2026.05</p>
-            <h3 className="mt-2 text-xl font-semibold">나무병원 소속 나무의사</h3>
-            <ul className="mt-5 space-y-3">
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <article className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur">
+            <span className="inline-block rounded-full border border-white/20 px-3 py-1 text-xs font-semibold text-white/60">
+              2024.05 – 2025.05
+            </span>
+            <h3 className="mt-4 text-xl font-semibold">나무병원 소속 나무의사</h3>
+            <ul className="mt-6 space-y-4">
               {[
                 { label: "청와대 수목관리", desc: "천연기념물, 대통령 기념식수목, 경관수목" },
                 { label: "강원도 수목", desc: "천연기념물 및 보호수" },
                 { label: "경상도 수목", desc: "함양 상림, 하동 송림, 천연기념물 및 보호수" },
               ].map((item) => (
-                <li key={item.label} className="flex flex-col gap-0.5">
-                  <span className="text-sm font-semibold">{item.label}</span>
-                  <span className="text-sm text-slate-600 dark:text-slate-300">{item.desc}</span>
+                <li key={item.label} className="border-l-2 border-white/20 pl-4">
+                  <p className="text-sm font-semibold">{item.label}</p>
+                  <p className="mt-0.5 text-sm text-white/60">{item.desc}</p>
                 </li>
               ))}
             </ul>
           </article>
 
-          <article className="rounded-3xl border border-slate-200 bg-white p-8 dark:border-slate-800 dark:bg-slate-950">
-            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">2025.10 – 현재</p>
-            <h3 className="mt-2 text-xl font-semibold">나무의사협회 대위원</h3>
-            <ul className="mt-5 space-y-3">
+          <article className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur">
+            <span className="inline-block rounded-full border border-white/20 px-3 py-1 text-xs font-semibold text-white/60">
+              2025.10 – 현재
+            </span>
+            <h3 className="mt-4 text-xl font-semibold">나무의사협회 대위원</h3>
+            <ul className="mt-6 space-y-4">
               {[
                 { label: "나무의사협회장 표창 수상", desc: "" },
                 { label: "학교숲 컨설팅", desc: "수락고등학교, 서울사대부고 등" },
                 { label: "가로수 조사 및 컨설팅", desc: "마포대로 소나무 등" },
               ].map((item) => (
-                <li key={item.label} className="flex flex-col gap-0.5">
-                  <span className="text-sm font-semibold">{item.label}</span>
-                  {item.desc && <span className="text-sm text-slate-600 dark:text-slate-300">{item.desc}</span>}
+                <li key={item.label} className="border-l-2 border-white/20 pl-4">
+                  <p className="text-sm font-semibold">{item.label}</p>
+                  {item.desc && <p className="mt-0.5 text-sm text-white/60">{item.desc}</p>}
                 </li>
               ))}
             </ul>
