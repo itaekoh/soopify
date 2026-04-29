@@ -19,12 +19,12 @@ export default function Home() {
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/70 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/60">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-          <a className="flex items-center gap-3" href="#">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-950 text-white dark:bg-white dark:text-slate-950">S</span>
-            <div className="leading-tight">
-              <div className="text-base font-semibold tracking-tight">Soopify</div>
-              <div className="text-xs text-slate-600 dark:text-slate-300">Urban Tree Management</div>
-            </div>
+          <a className="flex items-center" href="#">
+            <img
+              src="/images/soopify-logo.png"
+              alt="Soopify"
+              className="h-14 w-auto md:h-16"
+            />
           </a>
           <nav className="hidden items-center gap-7 md:flex">
             <a className="text-sm font-semibold text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white" href="#solutions">Solutions</a>

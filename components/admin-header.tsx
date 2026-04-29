@@ -30,13 +30,12 @@ export function AdminHeader({ onLogout }: AdminHeaderProps) {
     <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/70 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/60">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
         <Link href="/admin" className="flex items-center gap-3">
-          <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-950 text-white dark:bg-white dark:text-slate-950">
-            S
-          </span>
-          <div className="leading-tight">
-            <div className="text-base font-semibold tracking-tight">Soopify Admin</div>
-            <div className="text-xs text-slate-600 dark:text-slate-300">관리자 페이지</div>
-          </div>
+          <img
+            src="/images/soopify-logo.png"
+            alt="Soopify"
+            className="h-10 w-auto"
+          />
+          <span className="border-l border-slate-300 pl-3 text-xs text-slate-600 dark:border-slate-600 dark:text-slate-300">관리자 페이지</span>
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">

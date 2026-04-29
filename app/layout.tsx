@@ -1,7 +1,15 @@
 // app/layout.tsx
+import type { Metadata } from "next"
 import "./globals.css"
 import { GoogleAnalytics } from "@/components/google-analytics"
 import { AuthProvider } from "@/contexts/auth-context"
+
+export const metadata: Metadata = {
+  icons: {
+    icon: "/images/soopify-icon.png",
+    apple: "/images/soopify-icon.png",
+  },
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
