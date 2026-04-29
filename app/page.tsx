@@ -133,6 +133,7 @@ export default function Home() {
         </section>
 
         <ProductsSection />
+        <CredentialsSection />
         <InsightsSection />
 
         {/* CONTACT */}
@@ -170,6 +171,56 @@ export default function Home() {
         </div>
       </footer>
     </div>
+  )
+}
+
+function CredentialsSection() {
+  return (
+    <section className="border-t border-slate-200 py-16 dark:border-slate-800">
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="max-w-3xl">
+          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">나무의사 이력</h2>
+          <p className="mt-4 text-lg text-slate-700 dark:text-slate-200">
+            현장 경험에서 출발한 도구입니다.
+          </p>
+        </div>
+        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+          <article className="rounded-3xl border border-slate-200 bg-white p-8 dark:border-slate-800 dark:bg-slate-950">
+            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">2024.05 – 2026.05</p>
+            <h3 className="mt-2 text-xl font-semibold">나무병원 소속 나무의사</h3>
+            <ul className="mt-5 space-y-3">
+              {[
+                { label: "청와대 수목관리", desc: "천연기념물, 대통령 기념식수목, 경관수목" },
+                { label: "강원도 수목", desc: "천연기념물 및 보호수" },
+                { label: "경상도 수목", desc: "함양 상림, 하동 송림, 천연기념물 및 보호수" },
+              ].map((item) => (
+                <li key={item.label} className="flex flex-col gap-0.5">
+                  <span className="text-sm font-semibold">{item.label}</span>
+                  <span className="text-sm text-slate-600 dark:text-slate-300">{item.desc}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article className="rounded-3xl border border-slate-200 bg-white p-8 dark:border-slate-800 dark:bg-slate-950">
+            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">2025.10 – 현재</p>
+            <h3 className="mt-2 text-xl font-semibold">나무의사협회 대위원</h3>
+            <ul className="mt-5 space-y-3">
+              {[
+                { label: "나무의사협회장 표창 수상", desc: "" },
+                { label: "학교숲 컨설팅", desc: "수락고등학교, 서울사대부고 등" },
+                { label: "가로수 조사 및 컨설팅", desc: "마포대로 소나무 등" },
+              ].map((item) => (
+                <li key={item.label} className="flex flex-col gap-0.5">
+                  <span className="text-sm font-semibold">{item.label}</span>
+                  {item.desc && <span className="text-sm text-slate-600 dark:text-slate-300">{item.desc}</span>}
+                </li>
+              ))}
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
   )
 }
 
