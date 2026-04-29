@@ -29,7 +29,6 @@ export default function Home() {
           <nav className="hidden items-center gap-7 md:flex">
             <a className="text-sm font-semibold text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white" href="#solutions">Solutions</a>
             <a className="text-sm font-semibold text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white" href="#services">Services</a>
-            <a className="text-sm font-semibold text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white" href="#cases">Case Studies</a>
             <a className="text-sm font-semibold text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white" href="#insights">Insights</a>
             <a className="text-sm font-semibold text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white" href="#contact">Support</a>
           </nav>
@@ -52,7 +51,6 @@ export default function Home() {
             <nav className="flex flex-col gap-2">
               <a className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900" href="#solutions">Solutions</a>
               <a className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900" href="#services">Services</a>
-              <a className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900" href="#cases">Case Studies</a>
               <a className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900" href="#insights">Insights</a>
               <a className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900" href="#contact">Support</a>
             </nav>
@@ -167,7 +165,6 @@ export default function Home() {
         {/* I'll split into separate file */}
         <SolutionsSection />
         <ServicesSection />
-        <CaseStudiesSection />
         <InsightsSection />
 
         {/* CONTACT */}
@@ -333,53 +330,3 @@ function ServicesSection() {
   )
 }
 
-function CaseStudiesSection() {
-  const cases = [
-    {
-      title: "현장 기록 기반 관리 설계",
-      category: "학교숲",
-      description: "우선순위와 연차별 관리계획을 정리.",
-      image: "https://images.unsplash.com/photo-1588392382834-a891154bca4d?auto=format&fit=crop&w=800&q=80",
-      kind: "school"
-    },
-    {
-      title: "리스크 중심 점검·대응 체계",
-      category: "가로수",
-      description: "위험 요소 분류와 사전 조치 계획.",
-      image: "https://images.unsplash.com/photo-1476231682828-37e571bc172f?auto=format&fit=crop&w=800&q=80",
-      kind: "street"
-    },
-    {
-      title: "민원/하자 대응 리포트",
-      category: "아파트",
-      description: "근거 중심 문서로 커뮤니케이션 단순화.",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80",
-      kind: "apartment"
-    }
-  ]
-
-  return (
-    <section className="py-16" id="cases">
-      <div className="mx-auto max-w-6xl px-4">
-        <div className="max-w-3xl">
-          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Case Studies</h2>
-          <p className="mt-4 text-lg text-slate-700 dark:text-slate-200">사례는 "현장 + 표준 + 기록"이 작동하는 방식입니다.</p>
-        </div>
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3 case-grid">
-          {cases.map((caseStudy, idx) => (
-            <article key={idx} className="overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 h-full">
-              <div className="aspect-[16/10]">
-                <img alt={caseStudy.title} className="js-media object-center tone-unify" data-kind={caseStudy.kind} data-src={caseStudy.image} loading="lazy"/>
-              </div>
-              <div className="p-6 flex flex-col h-full">
-                <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">{caseStudy.category}</p>
-                <h3 className="mt-2 text-xl font-semibold">{caseStudy.title}</h3>
-                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{caseStudy.description}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
