@@ -133,7 +133,7 @@ export default function Home() {
 
                   <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
                     <div className="aspect-[21/9] hero-media-sm">
-                      <img alt="Operations preview" className="js-media" data-kind="operations" data-src="https://otthqvsekttrljmonvdg.supabase.co/storage/v1/object/public/images/public/6c9a3c66-b1a1-47a7-8a1a-a666b238dcdb/meeting.jpg" loading="lazy"/>
+                      <img alt="Operations preview" className="js-media" data-kind="operations" data-src="https://images.unsplash.com/photo-1531973576160-7125cd663d86?auto=format&fit=crop&w=800&q=80" loading="lazy"/>
                     </div>
                     <div className="p-3">
                       <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">Operations</p>
@@ -247,7 +247,7 @@ function ServicesSection() {
       category: "Tree Clinic System",
       description: "진단·리포트·서비스 안내를 하나의 운영 구조로 정리합니다. 홈페이지부터 업무 흐름까지 실제 운영 기준에 맞춰 설계합니다.",
       output: "산출물: 운영 구조·웹/리포트 템플릿",
-      image: "https://otthqvsekttrljmonvdg.supabase.co/storage/v1/object/public/images/public/6c9a3c66-b1a1-47a7-8a1a-a666b238dcdb/treesystem.jpg",
+      image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80",
       kind: "service-dx",
       link: "#contact"
     },
@@ -256,7 +256,7 @@ function ServicesSection() {
       category: "Tree Health Program",
       description: "상태를 기준화하고 관리 우선순위를 도출합니다.",
       output: "산출물: 표준 리포트(PDF)",
-      image: "https://otthqvsekttrljmonvdg.supabase.co/storage/v1/object/public/images/public/6c9a3c66-b1a1-47a7-8a1a-a666b238dcdb/HhflsOjoXrgcIPRpk73-x.jpg",
+      image: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80",
       kind: "service-health",
       link: "#"
     },
@@ -265,7 +265,7 @@ function ServicesSection() {
       category: "Tree Risk Program",
       description: "위험 요소를 평가하고 대응 우선순위를 제시합니다.",
       output: "산출물: 위험성 평가서",
-      image: "https://otthqvsekttrljmonvdg.supabase.co/storage/v1/object/public/images/public/6c9a3c66-b1a1-47a7-8a1a-a666b238dcdb/tree_risk.png",
+      image: "https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?auto=format&fit=crop&w=800&q=80",
       kind: "service-risk",
       link: "#"
     },
@@ -274,7 +274,7 @@ function ServicesSection() {
       category: "Pine Care Program",
       description: "계절·입지 기반으로 관리 루틴을 설계합니다.",
       output: "산출물: 연간 로드맵",
-      image: "https://otthqvsekttrljmonvdg.supabase.co/storage/v1/object/public/images/public/6c9a3c66-b1a1-47a7-8a1a-a666b238dcdb/bluehouse_pine.jpg",
+      image: "https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?auto=format&fit=crop&w=800&q=80",
       kind: "service-pine",
       link: "#"
     }
@@ -339,21 +339,21 @@ function CaseStudiesSection() {
       title: "현장 기록 기반 관리 설계",
       category: "학교숲",
       description: "우선순위와 연차별 관리계획을 정리.",
-      image: "https://otthqvsekttrljmonvdg.supabase.co/storage/v1/object/public/images/public/6c9a3c66-b1a1-47a7-8a1a-a666b238dcdb/school_soop.jpg",
+      image: "https://images.unsplash.com/photo-1588392382834-a891154bca4d?auto=format&fit=crop&w=800&q=80",
       kind: "school"
     },
     {
       title: "리스크 중심 점검·대응 체계",
       category: "가로수",
       description: "위험 요소 분류와 사전 조치 계획.",
-      image: "https://otthqvsekttrljmonvdg.supabase.co/storage/v1/object/public/images/public/6c9a3c66-b1a1-47a7-8a1a-a666b238dcdb/tree_street.jpg",
+      image: "https://images.unsplash.com/photo-1476231682828-37e571bc172f?auto=format&fit=crop&w=800&q=80",
       kind: "street"
     },
     {
       title: "민원/하자 대응 리포트",
       category: "아파트",
       description: "근거 중심 문서로 커뮤니케이션 단순화.",
-      image: "https://otthqvsekttrljmonvdg.supabase.co/storage/v1/object/public/images/public/6c9a3c66-b1a1-47a7-8a1a-a666b238dcdb/apt.jpg",
+      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80",
       kind: "apartment"
     }
   ]
