@@ -88,6 +88,7 @@ export default function Home() {
 
         <ProductsSection />
         <CredentialsSection />
+        <PressSection />
         <InsightsSection />
 
         {/* CONTACT */}
@@ -125,6 +126,44 @@ export default function Home() {
         </div>
       </footer>
     </div>
+  )
+}
+
+function PressSection() {
+  return (
+    <section className="border-t border-slate-200 py-16 dark:border-slate-800">
+      <div className="mx-auto max-w-6xl px-4">
+        <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">Press</p>
+        <h2 className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl">관련 기사</h2>
+        <div className="mt-8">
+          <a
+            href="https://www.nikkei.com/article/DGXZQOGM280Z30Y6A120C2000000/?gift=g2ls5pnSNwqjA0MTczMDQ2NjekOFpRSKAyAQ.8xe6mXsD"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-start gap-6 rounded-3xl border border-slate-200 bg-white p-7 transition hover:border-slate-400 dark:border-slate-800 dark:bg-slate-950 dark:hover:border-slate-600"
+          >
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-slate-100 dark:bg-slate-800">
+              <svg className="h-5 w-5 text-slate-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v8a2 2 0 01-2 2z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 2v6h6M9 13h6M9 17h4" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <p className="text-xs font-semibold text-slate-400">日本経済新聞 · 2026.02.22</p>
+              <p className="mt-1.5 text-base font-semibold group-hover:underline">
+                한국 고도인재의 창업, 5년간 2.5배 증가 — "재벌 안녕" 출세 경쟁 심화
+              </p>
+              <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-300">
+                전문 지식을 가진 중년층이 AI·디지털 기반 창업을 주도하는 한국의 고도인재 창업 트렌드를 조명합니다.
+              </p>
+            </div>
+            <svg className="h-5 w-5 shrink-0 text-slate-400 transition group-hover:translate-x-1 group-hover:text-slate-700 dark:group-hover:text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
   )
 }
 
