@@ -186,7 +186,7 @@ function CredentialsSection() {
           {/* IT Career */}
           <article className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur">
             <span className="inline-block rounded-full border border-white/20 px-3 py-1 text-xs font-semibold text-white/60">
-              IT 경력 27년
+              1997.04 – 2024.04
             </span>
             <h3 className="mt-4 text-xl font-semibold">대기업 IT 전문가</h3>
             <p className="mt-3 text-sm text-white/60">시스템 기획·구축·운영 전반을 아우르는 현장 경험</p>
