@@ -69,7 +69,7 @@ export default function Home() {
           <div className="relative flex h-full flex-col items-center justify-center px-4 text-center text-white">
             <p className="text-xs font-semibold uppercase tracking-widest text-white/70">나무의사가 만드는 AI 도구</p>
             <h1 className="mt-4 text-5xl font-semibold tracking-tight md:text-7xl">
-              나무의사의 일,<br />AI로 도웁니다.
+              나무의사의 일,<br />AI가 함께합니다.
             </h1>
             <p className="mt-6 max-w-xl text-lg text-white/80 md:text-xl">
               홈페이지 자동 제작부터 수목 보고서 작성까지.<br className="hidden md:block" />
