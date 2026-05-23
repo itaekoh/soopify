@@ -18,12 +18,12 @@ export default function Home() {
 
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/70 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/60">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2">
           <a className="flex items-center" href="#">
             <img
               src="/images/soopify-logo.png"
               alt="Soopify"
-              className="h-14 w-auto md:h-16"
+              className="h-10 w-auto md:h-12"
             />
           </a>
           <nav className="hidden items-center gap-7 md:flex">
@@ -39,7 +39,7 @@ export default function Home() {
             </svg>
           </button>
           <V20ThemeToggle />
-          <a className="inline-flex items-center justify-center rounded-2xl whitespace-nowrap bg-slate-950 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200" href="#contact">
+          <a className="inline-flex items-center justify-center rounded-2xl whitespace-nowrap bg-slate-950 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200" href="#contact">
             문의하기
           </a>
         </div>
@@ -61,8 +61,8 @@ export default function Home() {
         {/* HERO */}
         <section className="relative h-[90vh] min-h-[600px] overflow-hidden">
           <img
-            src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2400&q=90"
-            alt="Forest"
+            src="/images/창선도_왕후박나무_.jpg"
+            alt="창선도 왕후박나무"
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
@@ -88,7 +88,6 @@ export default function Home() {
 
         <ProductsSection />
         <CredentialsSection />
-        <PressSection />
         <InsightsSection />
 
         {/* CONTACT */}
@@ -171,18 +170,36 @@ function CredentialsSection() {
   return (
     <section className="relative overflow-hidden bg-slate-950 py-20 text-white">
       <img
-        src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=2400&q=80"
+        src="/images/청와대_복자기.jpg"
         alt=""
-        className="absolute inset-0 h-full w-full object-cover opacity-20"
+        className="absolute inset-0 h-full w-full object-cover opacity-90"
       />
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-slate-950/35 to-slate-950/55" />
       <div className="relative mx-auto max-w-6xl px-4">
         <div className="mb-12 text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-white/50">Experience</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">나무의사 이력</h2>
-          <p className="mt-3 text-white/60">현장 경험에서 출발한 도구입니다.</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-white/50">Founder</p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">IT × 나무의사 융합</h2>
+          <p className="mt-3 text-white/60">대기업 IT 27년의 실무 경험 위에 나무의사 전문성을 더했습니다.</p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {/* IT Career */}
+          <article className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur">
+            <span className="inline-block rounded-full border border-white/20 px-3 py-1 text-xs font-semibold text-white/60">
+              IT 경력 27년
+            </span>
+            <h3 className="mt-4 text-xl font-semibold">대기업 IT 전문가</h3>
+            <p className="mt-3 text-sm text-white/60">시스템 기획·구축·운영 전반을 아우르는 현장 경험</p>
+            <ul className="mt-6 space-y-3">
+              {["KCC", "LOTTE", "SK", "GS"].map((co) => (
+                <li key={co} className="border-l-2 border-white/20 pl-4">
+                  <p className="text-sm font-semibold">{co}</p>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          {/* Tree Doctor */}
           <article className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur">
             <span className="inline-block rounded-full border border-white/20 px-3 py-1 text-xs font-semibold text-white/60">
               2024.05 – 2025.05
@@ -202,6 +219,7 @@ function CredentialsSection() {
             </ul>
           </article>
 
+          {/* Association */}
           <article className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur">
             <span className="inline-block rounded-full border border-white/20 px-3 py-1 text-xs font-semibold text-white/60">
               2025.10 – 현재
@@ -221,6 +239,36 @@ function CredentialsSection() {
             </ul>
           </article>
         </div>
+
+        {/* Press */}
+        <div className="mt-10">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-white/40">Press</p>
+          <a
+            href="https://www.nikkei.com/article/DGXZQOGM280Z30Y6A120C2000000/?gift=g2ls5pnSNwqjA0MTczMDQ2NjekOFpRSKAyAQ.8xe6mXsD"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-start gap-6 rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur transition hover:border-white/20"
+          >
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/10">
+              <svg className="h-5 w-5 text-white/60" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v8a2 2 0 01-2 2z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 2v6h6M9 13h6M9 17h4" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <p className="text-xs font-semibold text-white/40">日本経済新聞 · 2026.02.22</p>
+              <p className="mt-1.5 text-base font-semibold group-hover:underline">
+                한국 고도인재의 창업, 5년간 2.5배 증가 — "재벌 안녕" 출세 경쟁 심화
+              </p>
+              <p className="mt-1.5 text-sm text-white/60">
+                전문 지식을 가진 중년층이 AI·디지털 기반 창업을 주도하는 한국의 고도인재 창업 트렌드를 조명합니다.
+              </p>
+            </div>
+            <svg className="h-5 w-5 shrink-0 text-white/40 transition group-hover:translate-x-1 group-hover:text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
       </div>
     </section>
   )
@@ -228,33 +276,25 @@ function CredentialsSection() {
 
 function ProductsSection() {
   return (
-    <section id="products" className="mt-20 md:mt-28">
+    <section id="products" className="mt-20 md:mt-28 mb-16 md:mb-24">
       <div className="mx-auto max-w-6xl px-4 space-y-10">
         {/* Soopsite */}
         <div className="grid grid-cols-1 overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 md:grid-cols-2">
           <div className="relative aspect-[4/3] md:aspect-auto">
             <img
-              src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=85"
+              src="/images/soopsite.png"
               alt="Soopsite"
               className="h-full w-full object-cover"
             />
           </div>
-          <div className="flex flex-col justify-center px-10 py-14 md:px-14">
+          <div className="flex flex-col justify-center px-10 py-10 md:px-14">
             <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">Coming Soon</span>
             <h2 className="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">Soopsite</h2>
             <p className="mt-3 text-sm font-semibold text-slate-500 dark:text-slate-400">나무병원 홈페이지 자동 제작 에이전트</p>
-            <p className="mt-6 text-base leading-relaxed text-slate-700 dark:text-slate-200">
+            <p className="mt-4 text-base leading-relaxed text-slate-700 dark:text-slate-200">
               병원 정보를 입력하면 AI가 홈페이지를 자동으로 제작합니다. 전문 디자이너 없이도 신뢰감 있는 나무병원 웹사이트를 바로 운영할 수 있습니다.
             </p>
-            <ul className="mt-6 space-y-2.5">
-              {["병원 정보 입력만으로 자동 생성", "나무의사 자격·경력 자동 구성", "모바일 최적화 및 문의 폼 포함"].map((item) => (
-                <li key={item} className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-200">
-                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-slate-950 dark:bg-white" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-8">
+            <div className="mt-6">
               <a href="#contact" className="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-7 py-3.5 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200">
                 사전 문의하기
               </a>
@@ -264,22 +304,14 @@ function ProductsSection() {
 
         {/* Soopdoc */}
         <div className="grid grid-cols-1 overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 md:grid-cols-2">
-          <div className="flex flex-col justify-center px-10 py-14 md:px-14">
+          <div className="flex flex-col justify-center px-10 py-10 md:px-14">
             <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">Coming Soon</span>
             <h2 className="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">Soopdoc</h2>
             <p className="mt-3 text-sm font-semibold text-slate-500 dark:text-slate-400">수목 조사 → 보고서 자동 작성 에이전트</p>
-            <p className="mt-6 text-base leading-relaxed text-slate-700 dark:text-slate-200">
+            <p className="mt-4 text-base leading-relaxed text-slate-700 dark:text-slate-200">
               현장 조사 데이터를 입력하면 표준 수목 보고서를 자동으로 완성합니다. 작성 시간을 줄이고 품질은 높입니다.
             </p>
-            <ul className="mt-6 space-y-2.5">
-              {["현장 데이터 입력 → 보고서 자동 완성", "결재·민원·감사 대응 가능한 근거 문서", "수목 건강·위험도 평가 항목 포함"].map((item) => (
-                <li key={item} className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-200">
-                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-slate-950 dark:bg-white" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-8">
+            <div className="mt-6">
               <a href="#contact" className="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-7 py-3.5 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200">
                 사전 문의하기
               </a>
@@ -287,7 +319,7 @@ function ProductsSection() {
           </div>
           <div className="relative aspect-[4/3] md:aspect-auto">
             <img
-              src="https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?auto=format&fit=crop&w=1200&q=85"
+              src="/images/soopreport.png"
               alt="Soopdoc"
               className="h-full w-full object-cover"
             />
