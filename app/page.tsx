@@ -8,11 +8,11 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-white px-4 text-center">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-white px-4 text-center dark:bg-slate-950">
       <img
         src="/images/soopify-logo.png"
         alt="Soopify"
-        className="h-14 w-auto opacity-80"
+        className="h-24 w-auto md:h-32"
       />
       <p className="mt-10 text-sm font-semibold uppercase tracking-widest text-slate-400">준비중</p>
       <h1 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">
