@@ -23,7 +23,7 @@ export default function Home() {
             <img
               src="/images/soopify-logo.png"
               alt="Soopify"
-              className="h-10 w-auto md:h-12"
+              className="h-14 w-auto md:h-16"
             />
           </a>
           <nav className="hidden items-center gap-7 md:flex">
