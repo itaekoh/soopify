@@ -5,6 +5,7 @@ import { V20ClientScripts } from '@/components/v20-client-scripts'
 import { V20ContactSection } from '@/components/v20-contact-section'
 import { V20ThemeToggle } from '@/components/v20-theme-toggle'
 import { InsightsSection } from '@/components/insights-section'
+import { SoopifyLogo } from '@/components/soopify-logo'
 
 export const metadata: Metadata = {
   title: 'Soopify | 나무의사를 위한 AI 도구',
@@ -19,12 +20,8 @@ export default function Home() {
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/70 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/60">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2">
-          <a className="flex items-center" href="#">
-            <img
-              src="/images/soopify-logo.png"
-              alt="Soopify"
-              className="h-9 w-auto md:h-10"
-            />
+          <a className="flex items-center" href="#" aria-label="Soopify 홈">
+            <SoopifyLogo size="md" />
           </a>
           <nav className="hidden items-center gap-7 md:flex">
             <a className="text-sm font-semibold text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white" href="#products">Products</a>

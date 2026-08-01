@@ -45,3 +45,6 @@ next-env.d.ts
 
 # Temporary images
 image.png
+
+# 교체된 이전 로고 시안 (로컬 보관용)
+assets/brand/_archive/

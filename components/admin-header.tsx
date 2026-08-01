@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { LogOut } from "lucide-react"
 import { V20ThemeToggle } from "./v20-theme-toggle"
+import { SoopifyLogo } from "@/components/soopify-logo"
 
 type AdminHeaderProps = {
   onLogout?: () => void
@@ -29,12 +30,8 @@ export function AdminHeader({ onLogout }: AdminHeaderProps) {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/70 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/60">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        <Link href="/admin" className="flex items-center gap-3">
-          <img
-            src="/images/soopify-logo.png"
-            alt="Soopify"
-            className="h-10 w-auto"
-          />
+        <Link href="/admin" className="flex items-center gap-3" aria-label="Soopify 관리자 페이지">
+          <SoopifyLogo size="md" />
           <span className="border-l border-slate-300 pl-3 text-xs text-slate-600 dark:border-slate-600 dark:text-slate-300">관리자 페이지</span>
         </Link>
 

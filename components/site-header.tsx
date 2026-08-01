@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
+import { SoopifyLogo } from "@/components/soopify-logo"
 
 const navItems = [
   { href: "/#services", label: "서비스" },
@@ -23,13 +24,8 @@ export function SiteHeader() {
     <header className="border-b bg-background/80 backdrop-blur sticky top-0 z-30">
       <div className="max-w-5xl mx-auto flex items-center justify-between px-4 py-2.5 md:py-3">
         {/* 로고 */}
-        <Link href="/" className="flex items-center gap-3">
-          <img
-            src="/images/soopify-logo.png"
-            alt="Soopify Logo"
-            className="h-10 w-auto md:h-12"
-          />
-          <span className="sr-only">Soopify</span>
+        <Link href="/" className="flex items-center" aria-label="Soopify 홈">
+          <SoopifyLogo size="md" />
         </Link>
 
         {/* 데스크톱 네비 */}
