@@ -37,6 +37,39 @@ export function SoopifyMark({ className, size = "md" }: { className?: string; si
   )
 }
 
+/** 락업 원본 종횡비 (트리밍 후 883 x 202) */
+const LOCKUP_RATIO = 883 / 202
+
+/**
+ * 마크 + 워드마크가 한 장으로 그려진 공식 락업 이미지.
+ *
+ * 라이트/다크 두 장을 쓴다. 원본 워드마크 #2d5233 은 흰 배경에서 8.9:1 이지만
+ * slate-950 에서는 2.27:1 이라 어두운 배경에서 흐리다. 다크용은 잎은 원본
+ * 그대로 두고 글자만 slate-50 으로 바꾼 reversed 버전이다 (19.3:1).
+ */
+export function SoopifyLockup({ className, height = 32 }: { className?: string; height?: number }) {
+  const width = Math.round(height * LOCKUP_RATIO)
+  const common = { width, height, style: { height } }
+
+  return (
+    <>
+      <img
+        {...common}
+        src="/images/soopify-lockup.png"
+        alt="Soopify"
+        className={cn("w-auto dark:hidden", className)}
+      />
+      <img
+        {...common}
+        src="/images/soopify-lockup-dark.png"
+        alt=""
+        aria-hidden="true"
+        className={cn("hidden w-auto dark:block", className)}
+      />
+    </>
+  )
+}
+
 type LogoProps = {
   className?: string
   size?: Size

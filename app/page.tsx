@@ -5,7 +5,7 @@ import { V20ClientScripts } from '@/components/v20-client-scripts'
 import { V20ContactSection } from '@/components/v20-contact-section'
 import { V20ThemeToggle } from '@/components/v20-theme-toggle'
 import { InsightsSection } from '@/components/insights-section'
-import { SoopifyLogo } from '@/components/soopify-logo'
+import { SoopifyLogo, SoopifyLockup } from '@/components/soopify-logo'
 
 export const metadata: Metadata = {
   title: 'Soopify | 나무의사를 위한 AI 도구',
@@ -21,7 +21,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/70 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/60">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2">
           <a className="flex items-center" href="#" aria-label="Soopify 홈">
-            <SoopifyLogo size="md" />
+            <SoopifyLogo size="lg" markOnly />
           </a>
           <nav className="hidden items-center gap-7 md:flex">
             <a className="text-sm font-semibold text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white" href="#products">Products</a>
@@ -96,7 +96,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div>
-              <p className="text-base font-semibold text-slate-950 dark:text-white">Soopify</p>
+              <SoopifyLockup height={32} />
               <p className="mt-3 leading-relaxed text-slate-600 dark:text-slate-300">
                 수목관련 서비스는「산림보호법」에 따라 나무병원 소속 나무의사가 수행합니다.
               </p>
