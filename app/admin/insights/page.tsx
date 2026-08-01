@@ -37,7 +37,7 @@ export default function InsightsManagement() {
 
   async function checkAuth() {
     try {
-      const res = await fetch("/api/auth/check")
+      const res = await fetch("/api/auth/check", { cache: "no-store" })
       const data = await res.json()
 
       if (!data.authenticated) {

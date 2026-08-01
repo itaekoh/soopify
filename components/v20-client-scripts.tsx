@@ -3,68 +3,10 @@
 
 import { useEffect } from "react"
 
+// 테마 토글과 모바일 메뉴는 여기서 DOM 을 직접 만지던 코드였는데
+// components/app-header.tsx + theme-toggle.tsx 로 옮겨 React 상태로 다룬다.
+// 남은 건 아래 이미지 플레이스홀더 로더뿐이다.
 export function V20ClientScripts() {
-  useEffect(() => {
-    // Theme toggle
-    const themeBtn = document.getElementById('themeToggle')
-    if (themeBtn) {
-      const sun = themeBtn.querySelector('[data-icon="sun"]')
-      const moon = themeBtn.querySelector('[data-icon="moon"]')
-
-      function syncIcons() {
-        const isDark = document.documentElement.classList.contains('dark')
-        // In dark mode, show sun (switch to light). In light mode, show moon (switch to dark).
-        if (sun) sun.classList.toggle('hidden', !isDark)
-        if (moon) moon.classList.toggle('hidden', isDark)
-      }
-
-      themeBtn.addEventListener('click', function () {
-        const isDark = document.documentElement.classList.contains('dark')
-        document.documentElement.classList.toggle('dark', !isDark)
-        try {
-          localStorage.setItem('theme', !isDark ? 'dark' : 'light')
-        } catch (e) {}
-        syncIcons()
-      })
-
-      syncIcons()
-    }
-
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn')
-    const mobileMenu = document.getElementById('mobileMenu')
-
-    function setOpen(open: boolean) {
-      if (!mobileMenu || !mobileMenuBtn) return
-      mobileMenu.classList.toggle('hidden', !open)
-      mobileMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false')
-      mobileMenuBtn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기')
-    }
-
-    if (mobileMenuBtn && mobileMenu) {
-      mobileMenuBtn.addEventListener('click', () => {
-        const isOpen = !mobileMenu.classList.contains('hidden')
-        setOpen(!isOpen)
-      })
-
-      // Close when clicking a link
-      mobileMenu.addEventListener('click', (e) => {
-        const target = e.target as HTMLElement
-        if (target && target.tagName === 'A') setOpen(false)
-      })
-
-      // Close on resize to md+
-      const handleResize = () => {
-        if (window.innerWidth >= 768) setOpen(false)
-      }
-      window.addEventListener('resize', handleResize)
-
-      return () => {
-        window.removeEventListener('resize', handleResize)
-      }
-    }
-  }, [])
-
   // Image loader with placeholder
   useEffect(() => {
     const encodeSvgDataUri = (svg: string) =>

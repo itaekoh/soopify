@@ -3,9 +3,9 @@ import type { Metadata } from 'next'
 import { Mail, MapPin } from 'lucide-react'
 import { V20ClientScripts } from '@/components/v20-client-scripts'
 import { V20ContactSection } from '@/components/v20-contact-section'
-import { V20ThemeToggle } from '@/components/v20-theme-toggle'
 import { InsightsSection } from '@/components/insights-section'
-import { SoopifyLogo, SoopifyLockup } from '@/components/soopify-logo'
+import { SoopifyLockup } from '@/components/soopify-logo'
+import { LandingHeader } from '@/components/landing-header'
 
 export const metadata: Metadata = {
   title: 'Soopify | 나무의사를 위한 AI 도구',
@@ -17,41 +17,7 @@ export default function Home() {
     <div className="bg-white text-slate-950 dark:bg-slate-950 dark:text-slate-50">
       <V20ClientScripts />
 
-      {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/70 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/60">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2">
-          <a className="flex items-center" href="#" aria-label="Soopify 홈">
-            <SoopifyLogo size="lg" markOnly />
-          </a>
-          <nav className="hidden items-center gap-7 md:flex">
-            <a className="text-sm font-semibold text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white" href="#products">Products</a>
-            <a className="text-sm font-semibold text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white" href="#insights">Insights</a>
-            <a className="text-sm font-semibold text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white" href="#contact">Contact</a>
-          </nav>
-          <button aria-controls="mobileMenu" aria-expanded="false" aria-label="메뉴 열기" className="mr-2 inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-slate-200 bg-white/70 text-slate-700 shadow-sm transition hover:bg-white md:hidden dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-200 dark:hover:bg-slate-900" id="mobileMenuBtn" type="button">
-            <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 6h16"></path>
-              <path d="M4 12h16"></path>
-              <path d="M4 18h16"></path>
-            </svg>
-          </button>
-          <V20ThemeToggle />
-          <a className="inline-flex items-center justify-center rounded-2xl whitespace-nowrap bg-slate-950 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200" href="#contact">
-            문의하기
-          </a>
-        </div>
-
-        {/* Mobile Menu */}
-        <div className="hidden border-t border-slate-200/70 bg-white/80 backdrop-blur md:hidden dark:border-slate-800/70 dark:bg-slate-950/70" id="mobileMenu">
-          <div className="mx-auto max-w-6xl px-4 py-3">
-            <nav className="flex flex-col gap-2">
-              <a className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900" href="#products">Products</a>
-              <a className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900" href="#insights">Insights</a>
-              <a className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900" href="#contact">Contact</a>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <LandingHeader />
 
       <main>
         {/* HERO */}
