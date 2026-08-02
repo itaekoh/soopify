@@ -1,46 +1,21 @@
 "use client"
 
-import { createContext, useContext, useEffect, useState, ReactNode } from "react"
+import { useAdminModal } from "@/components/admin/admin-modal-provider"
 
-type AuthContextType = {
-  authenticated: boolean
-  loading: boolean
-  checkAuth: () => Promise<void>
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined)
-
-export function AuthProvider({ children }: { children: ReactNode }) {
-  const [authenticated, setAuthenticated] = useState(false)
-  const [loading, setLoading] = useState(true)
-
-  async function checkAuth() {
-    try {
-      const res = await fetch("/api/auth/check", { cache: "no-store" })
-      const data = await res.json()
-      setAuthenticated(data.authenticated || false)
-    } catch (err) {
-      setAuthenticated(false)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    checkAuth()
-  }, [])
-
-  return (
-    <AuthContext.Provider value={{ authenticated, loading, checkAuth }}>
-      {children}
-    </AuthContext.Provider>
-  )
-}
-
+/**
+ * 인증 상태 조회용 얇은 어댑터.
+ *
+ * 예전에는 여기서 직접 /api/auth/check 를 불렀는데, 관리자 모달이 같은 것을
+ * 부르면서 페이지마다 요청이 두 번 나갔다. 이제 세션의 단일 소스는
+ * AdminModalProvider 이고 여기서는 필요한 필드만 꺼내 쓴다.
+ *
+ * 사용처: components/board-list.tsx, app/board/[id]/page.tsx (수정 버튼 노출용)
+ */
 export function useAuth() {
-  const context = useContext(AuthContext)
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider")
+  const { session, loading, refresh } = useAdminModal()
+  return {
+    authenticated: session.authenticated,
+    loading,
+    checkAuth: refresh,
   }
-  return context
 }

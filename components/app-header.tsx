@@ -3,9 +3,10 @@
 
 import { useEffect, useState, type ReactNode } from "react"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
+import { Menu, Settings, X } from "lucide-react"
 import { SoopifyLogo } from "@/components/soopify-logo"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { useAdminModal } from "@/components/admin/admin-modal-provider"
 import { cn } from "@/lib/utils"
 
 /**
@@ -15,7 +16,7 @@ import { cn } from "@/lib/utils"
  * 모바일 드로어를 따로 구현하고 있어서, 로고 하나 바꾸는 데에도 세 파일을
  * 고쳐야 했다. 다른 건 네비 항목과 우측 액션뿐이므로 그 둘만 주입받는다.
  *
- * 사용처: components/landing-header.tsx, site-header.tsx, admin-header.tsx
+ * 사용처: components/landing-header.tsx, site-header.tsx
  */
 
 export type NavItem = {
@@ -35,6 +36,28 @@ type AppHeaderProps = {
   actions?: ReactNode
   /** 콘텐츠 컨테이너 최대 폭 클래스 */
   containerClassName?: string
+}
+
+/**
+ * 관리자 모달 진입점.
+ *
+ * 누구에게나 보이지만, 열리는 내용은 서버가 쿠키로 판정한다 — 인증된 경우에만
+ * 관리 메뉴가 뜨고, 아니면 모달 안에서 로그인 폼이 뜬다. 관리 데이터는 전부
+ * API 에서 다시 인증을 확인하므로 이 버튼이 노출되는 것 자체는 문제가 없다.
+ */
+function AdminGearButton() {
+  const { openModal } = useAdminModal()
+  return (
+    <button
+      type="button"
+      onClick={openModal}
+      aria-label="관리자 설정"
+      title="관리자"
+      className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border bg-background/70 text-muted-foreground shadow-sm transition hover:bg-accent sm:h-10 sm:w-10"
+    >
+      <Settings className="h-5 w-5" />
+    </button>
+  )
 }
 
 /** 같은 페이지 내 앵커(#...)는 Next Link 대신 평범한 a 로 렌더한다. */
@@ -100,6 +123,7 @@ export function AppHeader({
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
+          <AdminGearButton />
           {actions}
           {hasNav && (
             <button

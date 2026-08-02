@@ -11,6 +11,10 @@
 //   assets/brand/soopify-og.jpeg     1024x558  가로 락업 (흰 배경)
 //   assets/brand/_archive/                     교체된 이전 시안
 //
+// 생성물 중 하나는 원본 폴더로 되돌아간다:
+//   assets/brand/soopify-lockup-restored.png  심전도를 복원한 락업 (1024x558).
+//   Photoroom 파일의 드롭인 교체본. 외부에서 쓸 일이 있을 때 이걸 쓴다.
+//
 // 생성물
 //   app/icon.png                       32x32 파비콘
 //   app/favicon.ico                    16+32 PNG-in-ICO 폴백
@@ -62,25 +66,36 @@ async function contentBox(file) {
 
 /**
  * 락업에서 잎과 워드마크를 가르는 x 좌표.
- * 완전히 비어 있는 열(column) 중 가장 넓은 구간의 중앙을 경계로 삼는다.
+ * 그림이 실제로 있는 구간 안에서 가장 넓은 빈 열 구간의 중앙을 경계로 삼는다.
  * 하드코딩하지 않으므로 원본을 다시 내보내도 따라간다.
+ *
+ * 바깥 여백은 반드시 제외해야 한다. 트리밍 안 된 원본은 좌우 여백이
+ * 잎/워드마크 사이 간격보다 넓어서, 그냥 훑으면 여백 한가운데를 경계로
+ * 잡아버린다.
  */
 async function leafWordmarkSplit(buf) {
   const { data, info } = await sharp(buf).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
   const { width: w, height: h } = info
+
   const empty = []
   for (let x = 0; x < w; x++) {
     let ink = false
     for (let y = 0; y < h && !ink; y++) if (data[(y * w + x) * 4 + 3] > 8) ink = true
     empty.push(!ink)
   }
+
+  const first = empty.indexOf(false)
+  const last = empty.lastIndexOf(false)
+  if (first === -1) throw new Error("락업이 비어 있다")
+
   const gaps = []
   let start = null
-  for (let x = 0; x < w; x++) {
+  for (let x = first; x <= last; x++) {
     if (empty[x]) { if (start === null) start = x }
     else if (start !== null) { gaps.push([start, x - 1]); start = null }
   }
   if (!gaps.length) throw new Error("락업에서 잎/워드마크 경계를 찾지 못했다")
+
   const widest = gaps.reduce((a, b) => (b[1] - b[0] > a[1] - a[0] ? b : a))
   return Math.round((widest[0] + widest[1]) / 2)
 }
@@ -110,47 +125,88 @@ await sharp(markTrim)
   .png({ compressionLevel: 9 })
   .toFile(p("public/images/soopify-mark.png"))
 
-// ── 가로 락업 (마크 + 워드마크) ───────────────────────────────────────────
-// 원본은 1024x558 캔버스에 실제 그림이 883x202 뿐이라 그대로 쓰면 높이의
-// 36%만 로고가 차지한다. 완전 투명한 여백만 잘라낸다 — 픽셀은 손대지 않는다.
-{
-  const box = await contentBox(SRC_LOCKUP)
+/** 알파는 그대로 두고 RGB 만 한 색으로 덮는다 (자형·안티앨리어싱 보존).
+ *  composite 로 합치면 sharp 가 premultiply/unpremultiply 를 거치며 반투명
+ *  픽셀의 RGB 를 미세하게 바꿔놓기 때문에 raw 버퍼를 직접 고친다. */
+async function recolor(buf, hex) {
+  const { data, info } = await sharp(buf).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+  const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16))
+  for (let i = 0; i < data.length; i += 4) {
+    if (data[i + 3] === 0) continue // 완전 투명한 픽셀은 손대지 않는다
+    data[i] = r
+    data[i + 1] = g
+    data[i + 2] = b
+  }
+  return sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } })
+    .png()
+    .toBuffer()
+}
 
-  // 리사이즈를 먼저 끝내고 그 결과를 두 변형이 공유한다. 순서를 반대로 하면
-  // 라이트/다크가 각자 리샘플링을 거쳐 잎에 미세한 오차가 남는다.
-  const base = await sharp(SRC_LOCKUP)
-    .extract(box)
-    .resize({ height: 128 })
+// ── 가로 락업 (마크 + 워드마크) ───────────────────────────────────────────
+// 락업 원본은 Photoroom 으로 흰 배경을 지운 파일인데, 심전도선도 흰색이라
+// 배경으로 오인돼 잎 안쪽 흰 픽셀 425개가 같이 지워졌다(오른쪽 끝이 잘림).
+// 라이트 배경에서는 흰 페이지와 섞여 안 보였지만 다크 배경에서 드러난다.
+//
+// 그래서 락업을 두 조각으로 재조립한다:
+//   잎    — assets/brand/soopify-mark.png (배경 제거를 거치지 않아 온전함)
+//   워드마크 — Photoroom 락업의 오른쪽 부분 (진한 초록이라 손상되지 않음)
+// 배치 좌표는 하드코딩하지 않고 원본 락업에서 측정한 값을 그대로 쓴다.
+{
+  const lockupMeta = await sharp(SRC_LOCKUP).metadata()
+  const CW = lockupMeta.width
+  const CH = lockupMeta.height
+
+  // 원본 락업에서 잎 / 워드마크 슬롯을 측정한다
+  const split = await leafWordmarkSplit(SRC_LOCKUP)
+  const full = await contentBox(SRC_LOCKUP)
+  const leafSlot = await contentBox(
+    await sharp(SRC_LOCKUP)
+      .extract({ left: 0, top: 0, width: split, height: CH })
+      .png()
+      .toBuffer(),
+  )
+
+  // 워드마크는 원본 픽셀 그대로 잘라 쓴다
+  const wordLeft = split
+  const wordWidth = full.left + full.width - split
+  const wordStrip = await sharp(SRC_LOCKUP)
+    .extract({ left: wordLeft, top: 0, width: wordWidth, height: CH })
     .png()
     .toBuffer()
 
-  await sharp(base).png({ compressionLevel: 9 }).toFile(p("public/images/soopify-lockup.png"))
+  // 온전한 마크를 잎 슬롯 높이에 맞춰 넣는다 (가로는 종횡비대로)
+  const leaf = await sharp(markTrim).resize({ height: leafSlot.height }).png().toBuffer()
 
-  // 다크모드용 reversed 락업.
-  // 워드마크 #2d5233 은 slate-950 대비 2.27:1 이라 어두운 배경에서 흐리다.
-  // 잎은 그대로 두고(3.30:1 로 충분) 글자 영역의 RGB만 slate-50 으로 바꾼다.
-  //
-  // raw 버퍼를 직접 고친다. composite 로 합치면 sharp 가 premultiply /
-  // unpremultiply 를 거치면서 반투명 픽셀의 RGB 를 미세하게 바꿔놓는다.
-  // 이렇게 하면 경계 왼쪽은 바이트 단위로 동일하고, 알파는 전 영역 보존된다.
-  const split = await leafWordmarkSplit(base)
-  const { data, info } = await sharp(base).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
-  const { width: TW, height: TH } = info
-  const [wr, wg, wb] = [1, 3, 5].map((i) => parseInt(DARK_WORDMARK.slice(i, i + 2), 16))
+  const compose = async (word) =>
+    sharp({ create: { width: CW, height: CH, channels: 4, background: "#00000000" } })
+      .composite([
+        { input: leaf, left: leafSlot.left, top: leafSlot.top },
+        { input: word, left: wordLeft, top: 0 },
+      ])
+      .png()
+      .toBuffer()
 
-  for (let y = 0; y < TH; y++) {
-    for (let x = split; x < TW; x++) {
-      const i = (y * TW + x) * 4
-      if (data[i + 3] === 0) continue // 완전 투명한 픽셀은 손대지 않는다
-      data[i] = wr
-      data[i + 1] = wg
-      data[i + 2] = wb
-    }
-  }
+  const lightFull = await compose(wordStrip)
+  const darkFull = await compose(await recolor(wordStrip, DARK_WORDMARK))
 
-  await sharp(data, { raw: { width: TW, height: TH, channels: 4 } })
+  // 복원된 락업을 원본과 같은 해상도(1024x558)로도 남긴다.
+  // Photoroom 파일의 드롭인 교체본이며, 외부 문서·디자인 툴에서 쓸 수 있다.
+  // (워드마크는 원본 픽셀 그대로, 잎만 온전한 마크에서 축소해 넣은 것)
+  await sharp(lightFull)
     .png({ compressionLevel: 9 })
-    .toFile(p("public/images/soopify-lockup-dark.png"))
+    .toFile(p("assets/brand/soopify-lockup-restored.png"))
+
+  // 두 변형이 어긋나지 않도록 같은 박스로 자르고 같은 높이로 줄인다
+  const box = await contentBox(lightFull)
+  const finish = (buf, out) =>
+    sharp(buf)
+      .extract(box)
+      .resize({ height: 128 })
+      .png({ compressionLevel: 9 })
+      .toFile(p(out))
+
+  await finish(lightFull, "public/images/soopify-lockup.png")
+  await finish(darkFull, "public/images/soopify-lockup-dark.png")
 }
 
 // ── 파비콘 ────────────────────────────────────────────────────────────────

@@ -34,13 +34,13 @@ export default function NewPostPage() {
       const data = await res.json()
 
       if (!data.authenticated) {
-        router.push("/admin/login")
+        router.push("/?admin=1")
         return
       }
 
       setAuthenticated(true)
     } catch (err) {
-      router.push("/admin/login")
+      router.push("/?admin=1")
     } finally {
       setChecking(false)
     }

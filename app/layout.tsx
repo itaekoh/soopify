@@ -2,7 +2,8 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import { GoogleAnalytics } from "@/components/google-analytics"
-import { AuthProvider } from "@/contexts/auth-context"
+import { AdminModalProvider } from "@/components/admin/admin-modal-provider"
+import { AdminModal } from "@/components/admin/admin-modal"
 
 // 파비콘은 app/icon.png, app/favicon.ico, app/apple-icon.png 파일 컨벤션으로
 // 처리한다(파일 컨벤션이 metadata.icons보다 우선하므로 중복 선언하지 않는다).
@@ -41,9 +42,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-sans text-[17px] md:text-[18px]">
-        <AuthProvider>
+        <AdminModalProvider>
           {children}
-        </AuthProvider>
+          <AdminModal />
+        </AdminModalProvider>
       </body>
     </html>
   )

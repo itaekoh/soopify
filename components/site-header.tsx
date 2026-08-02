@@ -14,7 +14,7 @@ const NAV: NavItem[] = [
   { href: "/board", label: "공지사항" },
 ]
 
-/** 공개 페이지(/board/*, /admin/login) 헤더. */
+/** 공개 페이지(/board/*) 헤더. */
 export function SiteHeader() {
   return (
     <AppHeader

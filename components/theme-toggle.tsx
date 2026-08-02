@@ -22,9 +22,10 @@ const getServerSnapshot = () => null
  * app/layout.tsx 의 부팅 스크립트와 같은 방식으로 동작한다 —
  * `<html>` 의 dark 클래스를 직접 토글하고 localStorage.theme 에 기록한다.
  *
- * next-themes 의 useTheme 를 쓰지 않는 이유: ThemeProvider 가 트리에 없어서
- * setTheme 가 아무 일도 하지 않았다(그래서 /board 의 토글이 죽어 있었다).
- * 부팅 스크립트가 이미 같은 규약을 쓰고 있으므로 여기에 맞춘다.
+ * 예전에는 next-themes 를 쓰는 토글이 따로 있었는데 ThemeProvider 가 트리에
+ * 없어서 setTheme 가 아무 일도 하지 않았다(그래서 /board 의 토글이 죽어
+ * 있었다). 부팅 스크립트가 이미 이 규약을 쓰고 있으므로 여기에 맞추고,
+ * next-themes 의존성은 제거했다.
  */
 export function ThemeToggle({ className }: { className?: string }) {
   const dark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
