@@ -17,6 +17,10 @@ type Insight = {
   } | null
 }
 
+/** 랜딩에 노출할 글 수. 3열 한 행으로 맞춘다 — 6건이면 두 행이 되어
+ *  섹션이 다른 섹션보다 훨씬 커진다. 전체는 블로그에서 본다. */
+const VISIBLE = 3
+
 export function InsightsSection() {
   const [insights, setInsights] = useState<Insight[]>([])
   const [loading, setLoading] = useState(true)
@@ -29,7 +33,7 @@ export function InsightsSection() {
     try {
       const res = await fetch("/api/insights")
       const data = await res.json()
-      setInsights(data.data || [])
+      setInsights((data.data || []).slice(0, VISIBLE))
     } catch (err) {
       console.error("Failed to fetch insights:", err)
     } finally {
@@ -43,14 +47,19 @@ export function InsightsSection() {
     return text.length > maxLength ? text.substring(0, maxLength) + '...' : text
   }
 
+  // Products 와의 사이에는 구분선을 두지 않는다 — 섹션이 갈라져 보인다.
+  // About/Products 는 배경색 차이로 이미 나뉘어 있다.
   return (
-    <section className="border-t border-slate-200 py-16 dark:border-slate-800" id="insights">
+    <section className="py-16" id="insights">
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
-            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Insights</h2>
-            <p className="mt-4 text-lg text-slate-700 dark:text-slate-200">
-              현장에서의 판단 기준과 운영 사례를 공유합니다.
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">Insights</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+              현장에서의 판단 기준과 운영 사례
+            </h2>
+            <p className="mt-3 text-base text-slate-600 dark:text-slate-300">
+              나무를 보는 눈과 실무 기록을 공유합니다.
             </p>
           </div>
           <a

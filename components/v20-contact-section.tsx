@@ -61,10 +61,11 @@ export function V20ContactSection() {
         <div className="rounded-3xl bg-slate-950 p-10 text-white dark:bg-white dark:text-slate-950">
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center">
             <div>
-              <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
-                "진단 이후"를 함께 설계할 파트너를 찾습니다.
+              <p className="text-xs font-semibold uppercase tracking-widest opacity-60">Contact</p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+                &ldquo;진단 이후&rdquo;를 함께 설계할 파트너를 찾습니다.
               </h2>
-              <p className="mt-4 text-lg opacity-90">
+              <p className="mt-3 text-base opacity-90">
                 서비스 문의, 공동 프로젝트, 협업(파트너십) 모두 환영합니다.
               </p>
             </div>

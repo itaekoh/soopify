@@ -1,6 +1,6 @@
 ﻿// app/page.tsx
 import type { Metadata } from 'next'
-import { Mail, MapPin } from 'lucide-react'
+import { ArrowUpRight, Mail, MapPin } from 'lucide-react'
 import { V20ClientScripts } from '@/components/v20-client-scripts'
 import { V20ContactSection } from '@/components/v20-contact-section'
 import { InsightsSection } from '@/components/insights-section'
@@ -9,7 +9,7 @@ import { LandingHeader } from '@/components/landing-header'
 
 export const metadata: Metadata = {
   title: 'Soopify | 나무의사를 위한 AI 도구',
-  description: '나무병원 홈페이지 자동 제작부터 수목 보고서 작성까지. 나무의사의 업무를 AI로 바꿉니다.',
+  description: '나무병원 홈페이지 제작부터 수목 보고서 작성까지. 나무의사의 업무를 AI로 바꿉니다.',
 }
 
 export default function Home() {
@@ -20,7 +20,6 @@ export default function Home() {
       <LandingHeader />
 
       <main>
-        {/* HERO */}
         {/* HERO */}
         <section className="relative h-[90vh] min-h-[600px] overflow-hidden">
           <img
@@ -35,7 +34,7 @@ export default function Home() {
               나무의사의 일,<br />AI가 함께합니다.
             </h1>
             <p className="mt-6 max-w-xl text-lg text-white/80 md:text-xl">
-              홈페이지 자동 제작부터 수목 보고서 작성까지.<br className="hidden md:block" />
+              홈페이지 제작부터 수목 보고서 작성까지.<br className="hidden md:block" />
               현장 경험을 담은 두 가지 도구를 만들고 있습니다.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
@@ -49,8 +48,8 @@ export default function Home() {
           </div>
         </section>
 
+        <AboutSection />
         <ProductsSection />
-        <CredentialsSection />
         <InsightsSection />
 
         {/* CONTACT */}
@@ -91,147 +90,89 @@ export default function Home() {
   )
 }
 
-function PressSection() {
+function AboutSection() {
   return (
-    <section className="border-t border-slate-200 py-16 dark:border-slate-800">
+    <section id="about" className="border-y border-slate-200 bg-slate-50 py-16 md:py-20 dark:border-slate-800 dark:bg-slate-900/40">
       <div className="mx-auto max-w-6xl px-4">
-        <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">Press</p>
-        <h2 className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl">관련 기사</h2>
-        <div className="mt-8">
-          <a
-            href="https://www.nikkei.com/article/DGXZQOGM280Z30Y6A120C2000000/?gift=g2ls5pnSNwqjA0MTczMDQ2NjekOFpRSKAyAQ.8xe6mXsD"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-start gap-6 rounded-3xl border border-slate-200 bg-white p-7 transition hover:border-slate-400 dark:border-slate-800 dark:bg-slate-950 dark:hover:border-slate-600"
-          >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-slate-100 dark:bg-slate-800">
-              <svg className="h-5 w-5 text-slate-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v8a2 2 0 01-2 2z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13 2v6h6M9 13h6M9 17h4" />
-              </svg>
-            </div>
-            <div className="flex-1">
-              <p className="text-xs font-semibold text-slate-400">日本経済新聞 · 2026.02.22</p>
-              <p className="mt-1.5 text-base font-semibold group-hover:underline">
-                한국 고도인재의 창업, 5년간 2.5배 증가 — "재벌 안녕" 출세 경쟁 심화
-              </p>
-              <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-300">
-                전문 지식을 가진 중년층이 AI·디지털 기반 창업을 주도하는 한국의 고도인재 창업 트렌드를 조명합니다.
-              </p>
-            </div>
-            <svg className="h-5 w-5 shrink-0 text-slate-400 transition group-hover:translate-x-1 group-hover:text-slate-700 dark:group-hover:text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </section>
-  )
-}
+        <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">About</p>
+        <h2 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight md:text-4xl">
+          나무를 이해하는 기술,<br />수목관리의 새로운 기준
+        </h2>
 
-function CredentialsSection() {
-  return (
-    <section className="relative overflow-hidden bg-slate-950 py-20 text-white">
-      <img
-        src="/images/청와대_복자기.jpg"
-        alt=""
-        className="absolute inset-0 h-full w-full object-cover opacity-90"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-slate-950/35 to-slate-950/55" />
-      <div className="relative mx-auto max-w-6xl px-4">
-        <div className="mb-12 text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-white/50">Founder</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">IT × 나무의사 융합</h2>
-          <p className="mt-3 text-white/60">대기업 IT 27년의 실무 경험 위에 나무의사 전문성을 더했습니다.</p>
-        </div>
+        {/* 좌: 포지셔닝 + 대표이사 말 (원래 둘로 나뉘어 같은 얘기를 반복했다)
+            우: 이력 */}
+        <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-5 md:gap-14">
+          <div className="md:col-span-3">
+            <p className="text-sm font-semibold text-primary">IT Engineering &times; Arboriculture</p>
+            <figure className="mt-4 border-l-2 border-primary/40 pl-6">
+              <blockquote className="text-xl font-semibold leading-snug tracking-tight md:text-2xl">
+                &ldquo;나무도 이제 데이터로 관리되어야 합니다.&rdquo;
+              </blockquote>
+              <figcaption className="mt-4">
+                <p className="text-sm font-semibold">대표이사</p>
+                <p className="mt-2 text-base leading-relaxed text-slate-700 dark:text-slate-200">
+                  27년간의 IT 경험과 나무의사 현장 경험을 결합해, 기존 수목관리 업무를
+                  데이터 기반 서비스로 전환하고 있습니다.
+                </p>
+              </figcaption>
+            </figure>
+          </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {/* IT Career */}
-          <article className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur">
-            <span className="inline-block rounded-full border border-white/20 px-3 py-1 text-xs font-semibold text-white/60">
-              1997.04 – 2024.04
-            </span>
-            <h3 className="mt-4 text-xl font-semibold">대기업 IT 전문가</h3>
-            <p className="mt-3 text-sm text-white/60">시스템 기획·구축·운영 전반을 아우르는 현장 경험</p>
-            <ul className="mt-6 space-y-3">
-              {["KCC", "LOTTE", "SK", "GS"].map((co) => (
-                <li key={co} className="border-l-2 border-white/20 pl-4">
-                  <p className="text-sm font-semibold">{co}</p>
-                </li>
-              ))}
-            </ul>
-          </article>
-
-          {/* Tree Doctor */}
-          <article className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur">
-            <span className="inline-block rounded-full border border-white/20 px-3 py-1 text-xs font-semibold text-white/60">
-              2024.05 – 2025.05
-            </span>
-            <h3 className="mt-4 text-xl font-semibold">나무병원 소속 나무의사</h3>
-            <ul className="mt-6 space-y-4">
+          <div className="md:col-span-2">
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">Career</p>
+            <dl className="mt-4 space-y-5">
               {[
-                { label: "청와대 수목관리", desc: "천연기념물, 대통령 기념식수목, 경관수목" },
-                { label: "강원도 수목", desc: "천연기념물 및 보호수" },
-                { label: "경상도 수목", desc: "함양 상림, 하동 송림, 천연기념물 및 보호수" },
+                {
+                  period: '1997.04 – 2024.04',
+                  title: '대기업 IT 27년',
+                  detail: '프로젝트관리전문가(PMP) · KCC · LOTTE · SK · GS',
+                },
+                {
+                  period: '2024.05 – 2025.05',
+                  title: '나무병원 소속 나무의사',
+                  detail: '청와대 수목관리 · 천연기념물 및 보호수(강원·경남)',
+                },
+                {
+                  period: '2025.10 – 현재',
+                  title: '나무의사협회 대위원',
+                  detail: '협회장 표창 · 학교숲·가로수 컨설팅',
+                },
               ].map((item) => (
-                <li key={item.label} className="border-l-2 border-white/20 pl-4">
-                  <p className="text-sm font-semibold">{item.label}</p>
-                  <p className="mt-0.5 text-sm text-white/60">{item.desc}</p>
-                </li>
+                <div key={item.period} className="border-l-2 border-slate-200 pl-4 dark:border-slate-700">
+                  <dt className="text-xs font-semibold tabular-nums text-slate-500 dark:text-slate-400">
+                    {item.period}
+                  </dt>
+                  <dd>
+                    <p className="mt-1 text-sm font-semibold">{item.title}</p>
+                    <p className="mt-0.5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                      {item.detail}
+                    </p>
+                  </dd>
+                </div>
               ))}
-            </ul>
-          </article>
-
-          {/* Association */}
-          <article className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur">
-            <span className="inline-block rounded-full border border-white/20 px-3 py-1 text-xs font-semibold text-white/60">
-              2025.10 – 현재
-            </span>
-            <h3 className="mt-4 text-xl font-semibold">나무의사협회 대위원</h3>
-            <ul className="mt-6 space-y-4">
-              {[
-                { label: "나무의사협회장 표창 수상", desc: "" },
-                { label: "학교숲 컨설팅", desc: "수락고등학교, 서울사대부고 등" },
-                { label: "가로수 조사 및 컨설팅", desc: "마포대로 소나무 등" },
-              ].map((item) => (
-                <li key={item.label} className="border-l-2 border-white/20 pl-4">
-                  <p className="text-sm font-semibold">{item.label}</p>
-                  {item.desc && <p className="mt-0.5 text-sm text-white/60">{item.desc}</p>}
-                </li>
-              ))}
-            </ul>
-          </article>
+            </dl>
+          </div>
         </div>
 
-        {/* Press */}
-        <div className="mt-10">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-white/40">Press</p>
-          <a
-            href="https://www.nikkei.com/article/DGXZQOGM280Z30Y6A120C2000000/?gift=g2ls5pnSNwqjA0MTczMDQ2NjekOFpRSKAyAQ.8xe6mXsD"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-start gap-6 rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur transition hover:border-white/20"
-          >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/10">
-              <svg className="h-5 w-5 text-white/60" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v8a2 2 0 01-2 2z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13 2v6h6M9 13h6M9 17h4" />
-              </svg>
-            </div>
-            <div className="flex-1">
-              <p className="text-xs font-semibold text-white/40">日本経済新聞 · 2026.02.22</p>
-              <p className="mt-1.5 text-base font-semibold group-hover:underline">
-                한국 고도인재의 창업, 5년간 2.5배 증가 — "재벌 안녕" 출세 경쟁 심화
-              </p>
-              <p className="mt-1.5 text-sm text-white/60">
-                전문 지식을 가진 중년층이 AI·디지털 기반 창업을 주도하는 한국의 고도인재 창업 트렌드를 조명합니다.
-              </p>
-            </div>
-            <svg className="h-5 w-5 shrink-0 text-white/40 transition group-hover:translate-x-1 group-hover:text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-        </div>
+        {/* 언론보도 — 한 줄 띠 */}
+        <a
+          href="https://www.nikkei.com/article/DGXZQOGM280Z30Y6A120C2000000/?gift=g2ls5pnSNwqjA0MTczMDQ2NjekOFpRSKAyAQ.8xe6mXsD"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="日本経済新聞 기사 새 창에서 열기"
+          className="group mt-10 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl border border-slate-200 bg-white px-5 py-3.5 text-sm transition hover:border-slate-300 dark:border-slate-800 dark:bg-slate-950 dark:hover:border-slate-700"
+        >
+          <span className="shrink-0 rounded-full bg-slate-900/10 px-2.5 py-1 text-xs font-semibold text-slate-700 dark:bg-white/10 dark:text-slate-200">
+            언론보도
+          </span>
+          <span className="shrink-0 text-xs text-slate-500 dark:text-slate-400">
+            日本経済新聞 &middot; 2026.02.22
+          </span>
+          <span className="min-w-0 flex-1 font-semibold group-hover:underline">
+            한국 고도인재의 창업, 5년간 2.5배 증가
+          </span>
+          <ArrowUpRight className="h-4 w-4 shrink-0 text-slate-400 transition group-hover:translate-x-0.5 group-hover:text-slate-700 dark:group-hover:text-slate-200" />
+        </a>
       </div>
     </section>
   )
@@ -239,26 +180,40 @@ function CredentialsSection() {
 
 function ProductsSection() {
   return (
-    <section id="products" className="mt-20 md:mt-28 mb-16 md:mb-24">
-      <div className="mx-auto max-w-6xl px-4 space-y-10">
+    <section id="products" className="py-16 md:py-20">
+      <div className="mx-auto max-w-6xl px-4">
+        <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">Products</p>
+        <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+          나무의사의 일을 돕는 도구
+        </h2>
+        <p className="mt-3 max-w-2xl text-base text-slate-600 dark:text-slate-300">
+          홈페이지 제작부터 수목 보고서 작성까지, 두 가지를 만들고 있습니다.
+        </p>
+
+        {/* 카드 두 장의 높이를 맞춘다. 예전에는 이미지에 max-h 를 걸어서
+            이미지가 카드 바닥에 닿지 않았고, 둥근 모서리가 아래쪽만 각지게
+            남으면서 카드마다 여백이 달랐다. 이제 높이는 카드가 정하고
+            이미지는 grid stretch 로 꽉 채운다. h 대신 min-h 를 쓴 이유는
+            문구가 길어지면 잘리는 대신 늘어나도록 하기 위함. */}
+        <div className="mt-10 space-y-6">
         {/* Soopsite */}
-        <div className="grid grid-cols-1 overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 md:grid-cols-2">
-          <div className="relative aspect-[4/3] md:aspect-auto">
+        <div className="grid grid-cols-1 overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 md:min-h-[380px] md:grid-cols-2">
+          <div className="relative aspect-[16/10] md:aspect-auto">
             <img
-              src="/images/soopsite.png"
+              src="/images/soopsite.jpg"
               alt="Soopsite"
               className="h-full w-full object-cover"
             />
           </div>
-          <div className="flex flex-col justify-center px-10 py-10 md:px-14">
+          <div className="flex flex-col justify-center p-8 md:p-10">
             <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">Coming Soon</span>
-            <h2 className="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">Soopsite</h2>
-            <p className="mt-3 text-sm font-semibold text-slate-500 dark:text-slate-400">나무병원 홈페이지 자동 제작 에이전트</p>
+            <h3 className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl">Soopsite</h3>
+            <p className="mt-3 text-sm font-semibold text-slate-500 dark:text-slate-400">나무병원 홈페이지 제작 에이전트</p>
             <p className="mt-4 text-base leading-relaxed text-slate-700 dark:text-slate-200">
-              병원 정보를 입력하면 AI가 홈페이지를 자동으로 제작합니다. 전문 디자이너 없이도 신뢰감 있는 나무병원 웹사이트를 바로 운영할 수 있습니다.
+              병원 정보를 입력하면 AI가 홈페이지를 제작합니다. 전문 디자이너 없이도 신뢰감 있는 나무병원 웹사이트를 바로 운영할 수 있습니다.
             </p>
             <div className="mt-6">
-              <a href="#contact" className="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-7 py-3.5 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200">
+              <a href="#contact" className="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200">
                 사전 문의하기
               </a>
             </div>
@@ -266,27 +221,28 @@ function ProductsSection() {
         </div>
 
         {/* Soopdoc */}
-        <div className="grid grid-cols-1 overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 md:grid-cols-2">
-          <div className="flex flex-col justify-center px-10 py-10 md:px-14">
+        <div className="grid grid-cols-1 overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 md:min-h-[380px] md:grid-cols-2">
+          <div className="flex flex-col justify-center p-8 md:p-10">
             <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">Coming Soon</span>
-            <h2 className="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">Soopdoc</h2>
-            <p className="mt-3 text-sm font-semibold text-slate-500 dark:text-slate-400">수목 조사 → 보고서 자동 작성 에이전트</p>
+            <h3 className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl">Soopdoc</h3>
+            <p className="mt-3 text-sm font-semibold text-slate-500 dark:text-slate-400">수목 조사 → 보고서 작성 에이전트</p>
             <p className="mt-4 text-base leading-relaxed text-slate-700 dark:text-slate-200">
-              현장 조사 데이터를 입력하면 표준 수목 보고서를 자동으로 완성합니다. 작성 시간을 줄이고 품질은 높입니다.
+              현장 조사 데이터를 입력하면 표준 수목 보고서를 완성합니다. 작성 시간을 줄이고 품질은 높입니다.
             </p>
             <div className="mt-6">
-              <a href="#contact" className="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-7 py-3.5 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200">
+              <a href="#contact" className="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200">
                 사전 문의하기
               </a>
             </div>
           </div>
-          <div className="relative aspect-[4/3] md:aspect-auto">
+          <div className="relative aspect-[16/10] md:aspect-auto">
             <img
-              src="/images/soopreport.png"
+              src="/images/soopreport.jpg"
               alt="Soopdoc"
               className="h-full w-full object-cover"
             />
           </div>
+        </div>
         </div>
       </div>
     </section>

@@ -115,7 +115,7 @@ export function AppHeader({
               <NavLink
                 key={item.href}
                 item={item}
-                className="text-sm font-semibold text-foreground/75 transition hover:text-foreground"
+                className="text-base font-semibold text-foreground/75 transition hover:text-foreground"
               />
             ))}
           </nav>
@@ -148,7 +148,7 @@ export function AppHeader({
                 key={item.href}
                 item={item}
                 onClick={close}
-                className="rounded-xl px-3 py-2 text-sm font-semibold transition hover:bg-accent"
+                className="rounded-xl px-3 py-2.5 text-base font-semibold transition hover:bg-accent"
               />
             ))}
           </nav>
