@@ -1,6 +1,7 @@
 ﻿// app/page.tsx
+import { Fragment } from 'react'
 import type { Metadata } from 'next'
-import { ArrowUpRight, Mail, MapPin } from 'lucide-react'
+import { ArrowUpRight, ChevronRight, ClipboardList, FileCheck2, Images, Mail, MapPin } from 'lucide-react'
 import { V20ClientScripts } from '@/components/v20-client-scripts'
 import { V20ContactSection } from '@/components/v20-contact-section'
 import { InsightsSection } from '@/components/insights-section'
@@ -179,6 +180,26 @@ function AboutSection() {
 }
 
 function ProductsSection() {
+  // 로드맵은 진척률(%)을 쓰지 않는다. 지금 쓸 수 있는 것과 목표만 구분한다.
+  // 마지막 단계(목표)만 아이콘 칩을 반전시켜 도착점으로 읽히게 한다.
+  const roadmap = [
+    { title: '사진대지', note: '지금 쓸 수 있습니다', icon: Images, tone: 'now' },
+    { title: '나무병원 양식', note: '추가하는 중', icon: ClipboardList, tone: 'wip' },
+    { title: '종합보고서', note: '목표', icon: FileCheck2, tone: 'goal' },
+  ] as const
+
+  const chipClass = {
+    now: 'bg-primary/10 text-primary',
+    wip: 'bg-slate-500/10 text-slate-500 dark:text-slate-400',
+    goal: 'bg-slate-950 text-white dark:bg-white dark:text-slate-950',
+  } as const
+
+  const titleClass = {
+    now: 'text-primary',
+    wip: 'text-slate-600 dark:text-slate-300',
+    goal: 'text-slate-950 dark:text-white',
+  } as const
+
   return (
     <section id="products" className="py-16 md:py-20">
       <div className="mx-auto max-w-6xl px-4">
@@ -187,65 +208,116 @@ function ProductsSection() {
           나무의사의 일을 돕는 도구
         </h2>
         <p className="mt-3 max-w-2xl text-base text-slate-600 dark:text-slate-300">
-          홈페이지 제작부터 수목 보고서 작성까지, 두 가지를 만들고 있습니다.
+          수목 보고서 작성을 중심으로 만들고 있습니다. 나무병원 홈페이지 제작도 준비 중입니다.
         </p>
 
-        {/* 카드 두 장의 높이를 맞춘다. 예전에는 이미지에 max-h 를 걸어서
-            이미지가 카드 바닥에 닿지 않았고, 둥근 모서리가 아래쪽만 각지게
-            남으면서 카드마다 여백이 달랐다. 이제 높이는 카드가 정하고
-            이미지는 grid stretch 로 꽉 채운다. h 대신 min-h 를 쓴 이유는
-            문구가 길어지면 잘리는 대신 늘어나도록 하기 위함. */}
-        <div className="mt-10 space-y-6">
-        {/* Soopsite */}
-        <div className="grid grid-cols-1 overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 md:min-h-[380px] md:grid-cols-2">
-          <div className="relative aspect-[16/10] md:aspect-auto">
-            <img
-              src="/images/soopsite.jpg"
-              alt="Soopsite"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="flex flex-col justify-center p-8 md:p-10">
-            <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">Coming Soon</span>
-            <h3 className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl">Soopsite</h3>
-            <p className="mt-3 text-sm font-semibold text-slate-500 dark:text-slate-400">나무병원 홈페이지 제작 에이전트</p>
-            <p className="mt-4 text-base leading-relaxed text-slate-700 dark:text-slate-200">
-              병원 정보를 입력하면 AI가 홈페이지를 제작합니다. 전문 디자이너 없이도 신뢰감 있는 나무병원 웹사이트를 바로 운영할 수 있습니다.
-            </p>
-            <div className="mt-6">
-              <a href="#contact" className="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200">
-                사전 문의하기
-              </a>
-            </div>
-          </div>
-        </div>
+        {/* 서비스 중인 것과 아직 없는 것의 무게를 일부러 다르게 둔다.
+            같은 크기로 나란히 놓으면 둘 다 준비 중처럼 보인다. */}
+        <div className="mt-10 space-y-5">
+          {/* 닥나무 — 주력 */}
+          <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              <div className="relative aspect-[16/10] md:aspect-auto">
+                <img
+                  src="/images/soopreport.jpg"
+                  alt="닥나무로 만든 수목 보고서"
+                  className="h-full w-full object-cover"
+                />
+              </div>
 
-        {/* Soopdoc */}
-        <div className="grid grid-cols-1 overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 md:min-h-[380px] md:grid-cols-2">
-          <div className="flex flex-col justify-center p-8 md:p-10">
-            <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">Coming Soon</span>
-            <h3 className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl">Soopdoc</h3>
-            <p className="mt-3 text-sm font-semibold text-slate-500 dark:text-slate-400">수목 조사 → 보고서 작성 에이전트</p>
-            <p className="mt-4 text-base leading-relaxed text-slate-700 dark:text-slate-200">
-              현장 조사 데이터를 입력하면 표준 수목 보고서를 완성합니다. 작성 시간을 줄이고 품질은 높입니다.
-            </p>
-            <div className="mt-6">
-              <a href="#contact" className="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200">
-                사전 문의하기
-              </a>
+              <div className="flex flex-col justify-center p-8 md:p-10">
+                <span className="inline-flex w-fit items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  진행 중
+                </span>
+                <h3 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">닥나무</h3>
+                <p className="mt-2 text-sm font-semibold text-slate-500 dark:text-slate-400">
+                  수목 조사 &rarr; 보고서 작성
+                </p>
+                <p className="mt-4 text-base leading-relaxed text-slate-700 dark:text-slate-200">
+                  현장 사진을 올리면 사진대지가 만들어집니다. 나무병원에서 쓰는 양식을
+                  하나씩 더해, 최종적으로는 종합보고서까지 잇는 것을 목표로 합니다.
+                </p>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href="https://app.docnamu.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-950 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200"
+                  >
+                    app.docnamu.com
+                    <span aria-hidden="true">&rarr;</span>
+                  </a>
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center justify-center rounded-2xl border border-slate-200 px-6 py-3 text-sm font-semibold transition hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900"
+                  >
+                    문의하기
+                  </a>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="relative aspect-[16/10] md:aspect-auto">
-            <img
-              src="/images/soopreport.jpg"
-              alt="Soopdoc"
-              className="h-full w-full object-cover"
-            />
-          </div>
-        </div>
+
+            {/* 로드맵 — 카드 하단, 전체 폭 */}
+            <div className="border-t border-slate-200 bg-slate-50 px-8 py-6 md:px-10 dark:border-slate-800 dark:bg-slate-900/40">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-3">
+                {roadmap.map((step, i) => (
+                  <Fragment key={step.title}>
+                    <div className="flex min-w-0 items-center gap-3 sm:flex-1">
+                      <span
+                        className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${chipClass[step.tone]}`}
+                      >
+                        <step.icon className="h-4 w-4" />
+                      </span>
+                      <div className="min-w-0">
+                        <p className={`text-sm font-semibold ${titleClass[step.tone]}`}>{step.title}</p>
+                        <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">{step.note}</p>
+                      </div>
+                    </div>
+                    {i < roadmap.length - 1 && (
+                      <ChevronRight
+                        aria-hidden="true"
+                        className="hidden h-4 w-4 shrink-0 text-slate-300 sm:block dark:text-slate-600"
+                      />
+                    )}
+                  </Fragment>
+                ))}
+              </div>
+            </div>
+          </article>
+
+          {/* 나무병원 홈페이지 제작 — 준비 중이라 가볍게 */}
+          <article className="grid grid-cols-1 overflow-hidden rounded-3xl border border-slate-200 bg-white sm:grid-cols-3 dark:border-slate-800 dark:bg-slate-950">
+            <div className="flex flex-col justify-center p-8 sm:col-span-2 md:px-10">
+              <span className="w-fit rounded-full bg-slate-500/10 px-3 py-1 text-xs font-semibold text-slate-500 dark:text-slate-400">
+                준비 중
+              </span>
+              <h3 className="mt-3 text-xl font-semibold tracking-tight md:text-2xl">
+                나무병원 홈페이지 제작
+              </h3>
+              <p className="mt-2 text-base leading-relaxed text-slate-700 dark:text-slate-200">
+                병원 정보를 입력하면 AI가 홈페이지를 제작합니다. 전문 디자이너 없이도
+                신뢰감 있는 나무병원 웹사이트를 운영할 수 있습니다.
+              </p>
+              <div className="mt-5">
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center rounded-2xl border border-slate-200 px-6 py-3 text-sm font-semibold transition hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900"
+                >
+                  문의하기
+                </a>
+              </div>
+            </div>
+            <div className="relative aspect-[16/10] sm:aspect-auto">
+              <img
+                src="/images/soopsite.jpg"
+                alt="나무병원 홈페이지 예시"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </article>
         </div>
       </div>
     </section>
   )
 }
-
