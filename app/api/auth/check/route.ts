@@ -1,6 +1,6 @@
 // app/api/auth/check/route.ts
 import { NextResponse } from "next/server"
-import { isAuthenticated, adminEmail, passwordChangeAvailable } from "@/lib/auth"
+import { isAuthenticated, adminEmail, credentialsStoreReady } from "@/lib/auth"
 
 export async function GET() {
   try {
@@ -11,8 +11,8 @@ export async function GET() {
         ok: true,
         authenticated,
         // 관리자 화면 헤더에 표시할 정보. 로그인한 경우에만 내려준다.
-        email: authenticated ? adminEmail() : null,
-        canChangePassword: authenticated ? await passwordChangeAvailable() : false,
+        email: authenticated ? await adminEmail() : null,
+        canChangePassword: authenticated ? await credentialsStoreReady() : false,
       },
       {
         headers: {

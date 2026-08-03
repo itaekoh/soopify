@@ -41,7 +41,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className="font-sans text-[17px] md:text-[18px]">
+      {/* bg/text 를 body 에 둔다. 예전에는 app/page.tsx 의 래퍼 div 에만
+          있어서, 그 밖에 마운트되는 AdminModal 이 색을 물려받지 못했다.
+          다크모드에서 배경은 어두운데 글자는 브라우저 기본 검정이 되어
+          관리자 화면 글씨가 보이지 않았다. */}
+      <body className="bg-background font-sans text-[17px] text-foreground md:text-[18px]">
         <AdminModalProvider>
           {children}
           <AdminModal />

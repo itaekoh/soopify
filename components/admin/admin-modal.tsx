@@ -57,48 +57,56 @@ const SECTIONS: Section[] = [
   },
   {
     id: "password",
-    label: "비밀번호 변경",
-    description: "관리자 비밀번호를 변경합니다.",
+    label: "계정 관리",
+    description: "관리자 이메일과 비밀번호를 변경합니다.",
     icon: KeyRound,
     Panel: PasswordPanel,
   },
 ]
 
+/**
+ * 열려 있을 때만 내용을 마운트한다.
+ *
+ * 예전에는 AdminModal 이 항상 마운트된 채 open 이 false 면 null 을 반환했고,
+ * 열릴 때마다 effect 안에서 setSection/setNavOpen 으로 상태를 되돌렸다.
+ * effect 에서 동기적으로 setState 하면 렌더가 연쇄되므로, 열릴 때 새로
+ * 마운트해서 useState 초기값이 곧 리셋이 되게 했다.
+ */
 export function AdminModal() {
+  const { open } = useAdminModal()
+  if (!open) return null
+  return <AdminModalContent />
+}
+
+function AdminModalContent() {
   const router = useRouter()
-  const { open, loading, session, closeModal, refresh } = useAdminModal()
+  const { loading, session, closeModal, refresh } = useAdminModal()
   const [section, setSection] = useState<SectionId>("dashboard")
   const [navOpen, setNavOpen] = useState(false)
   const panelRef = useRef<HTMLDivElement>(null)
 
-  // 열릴 때마다 대시보드에서 시작하고, 배경 스크롤을 잠근다.
+  // 배경 스크롤 잠금
   useEffect(() => {
-    if (!open) return
-    setSection("dashboard")
-    setNavOpen(false)
     const previous = document.body.style.overflow
     document.body.style.overflow = "hidden"
     return () => {
       document.body.style.overflow = previous
     }
-  }, [open])
+  }, [])
 
   // Esc 로 닫기
   useEffect(() => {
-    if (!open) return
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeModal()
     }
     window.addEventListener("keydown", onKey)
     return () => window.removeEventListener("keydown", onKey)
-  }, [open, closeModal])
+  }, [closeModal])
 
   // 섹션이 바뀌면 본문을 맨 위로
   useEffect(() => {
     panelRef.current?.scrollTo({ top: 0 })
   }, [section])
-
-  if (!open) return null
 
   async function handleLogout() {
     try {
@@ -124,7 +132,9 @@ export function AdminModal() {
         if (e.target === e.currentTarget) closeModal()
       }}
     >
-      <div className="flex h-full w-full flex-col overflow-hidden bg-background shadow-2xl md:h-[88vh] md:max-w-6xl md:rounded-2xl md:border">
+      {/* text-foreground 를 명시한다. 이 모달은 layout 에서 페이지 래퍼 밖에
+          마운트되므로 색을 물려받을 조상이 body 뿐이다. */}
+      <div className="flex h-full w-full flex-col overflow-hidden bg-background text-foreground shadow-2xl md:h-[88vh] md:max-w-6xl md:rounded-2xl md:border">
         {/* 모달 헤더 */}
         <header className="flex shrink-0 items-center justify-between gap-3 border-b px-4 py-3">
           <div className="flex min-w-0 items-center gap-2">
