@@ -14,25 +14,27 @@ import { cn } from "@/lib/utils"
 /** 마크 원본 종횡비 (트리밍 후 815 x 605) */
 const MARK_RATIO = 815 / 605
 
+// 모바일에서 한 단계 작게 렌더한다. 헤더가 61px 밖에 안 되는데 마크가 44px 면
+// 메뉴바가 두껍게 느껴진다. px 는 종횡비 계산용 기준값(데스크톱 크기)이다.
 const SIZES = {
-  sm: { mark: 26, word: "text-base", gap: "gap-2" },
-  md: { mark: 32, word: "text-xl", gap: "gap-2.5" },
-  lg: { mark: 44, word: "text-3xl", gap: "gap-3" },
+  sm: { mark: "h-6 md:h-7", px: 28, word: "text-base", gap: "gap-2" },
+  md: { mark: "h-8 md:h-9", px: 36, word: "text-xl", gap: "gap-2.5" },
+  lg: { mark: "h-9 md:h-10", px: 40, word: "text-3xl", gap: "gap-3" },
 } as const
 
 type Size = keyof typeof SIZES
 
 export function SoopifyMark({ className, size = "md" }: { className?: string; size?: Size }) {
-  const h = SIZES[size].mark
+  const { mark, px } = SIZES[size]
   return (
     <img
       src="/images/soopify-mark.png"
       alt=""
       aria-hidden="true"
-      width={Math.round(h * MARK_RATIO)}
-      height={h}
-      className={cn("w-auto shrink-0", className)}
-      style={{ height: h }}
+      // width/height 는 종횡비 힌트로만 쓰인다. 실제 크기는 아래 클래스가 정한다.
+      width={Math.round(px * MARK_RATIO)}
+      height={px}
+      className={cn("w-auto shrink-0", mark, className)}
     />
   )
 }
