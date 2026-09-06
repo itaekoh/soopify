@@ -4,11 +4,13 @@ import "./globals.css"
 import { GoogleAnalytics } from "@/components/google-analytics"
 import { AdminModalProvider } from "@/components/admin/admin-modal-provider"
 import { AdminModal } from "@/components/admin/admin-modal"
+import { SITE_URL } from "@/lib/site"
 
 // 파비콘은 app/icon.png, app/favicon.ico, app/apple-icon.png 파일 컨벤션으로
 // 처리한다(파일 컨벤션이 metadata.icons보다 우선하므로 중복 선언하지 않는다).
 // 세 파일 모두 scripts/build-brand-assets.mjs 가 생성한다.
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   openGraph: {
     siteName: "Soopify",
     locale: "ko_KR",
