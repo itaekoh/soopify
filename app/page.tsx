@@ -85,8 +85,8 @@ export default function Home() {
           <div className="mt-3 flex flex-col gap-3 text-xs md:flex-row md:items-center md:justify-between">
             <p className="text-slate-500 dark:text-slate-400">© {new Date().getFullYear()} Soopify. All rights reserved.</p>
             <div className="flex gap-3">
-              <a className="hover:underline" href="#">이용약관</a>
-              <a className="hover:underline" href="#">개인정보처리방침</a>
+              <a className="hover:underline" href="/terms">이용약관</a>
+              <a className="hover:underline" href="/privacy">개인정보처리방침</a>
             </div>
           </div>
         </div>

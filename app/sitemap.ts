@@ -7,6 +7,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: SITE_URL, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE_URL}/board`, changeFrequency: "weekly", priority: 0.5 },
+    { url: `${SITE_URL}/terms`, changeFrequency: "yearly", priority: 0.1 },
+    { url: `${SITE_URL}/privacy`, changeFrequency: "yearly", priority: 0.1 },
   ]
 
   // DB 조회가 실패해도(빌드 시점 등) 정적 라우트는 나가야 하므로 삼킨다.
