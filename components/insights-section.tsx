@@ -2,6 +2,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Image from "next/image"
 
 type Insight = {
   id: number
@@ -89,11 +90,13 @@ export function InsightsSection() {
               >
                 {/* 썸네일 이미지 */}
                 {insight.featured_image_url && (
-                  <div className="aspect-video w-full overflow-hidden">
-                    <img
+                  <div className="relative aspect-video w-full overflow-hidden">
+                    <Image
                       src={insight.featured_image_url}
                       alt={insight.title}
-                      className="h-full w-full object-cover"
+                      fill
+                      sizes="(min-width: 1024px) 368px, (min-width: 768px) 564px, 100vw"
+                      className="object-cover"
                     />
                   </div>
                 )}

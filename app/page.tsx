@@ -1,6 +1,7 @@
 ﻿// app/page.tsx
 import { Fragment } from 'react'
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { ArrowUpRight, ChevronRight, ClipboardList, FileCheck2, Images, Mail, MapPin } from 'lucide-react'
 import { V20ClientScripts } from '@/components/v20-client-scripts'
 import { V20ContactSection } from '@/components/v20-contact-section'
@@ -23,10 +24,13 @@ export default function Home() {
       <main>
         {/* HERO */}
         <section className="relative h-[90vh] min-h-[600px] overflow-hidden">
-          <img
+          <Image
             src="/images/창선도_왕후박나무_.jpg"
             alt="창선도 왕후박나무"
-            className="absolute inset-0 h-full w-full object-cover"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
           <div className="relative flex h-full flex-col items-center justify-center px-4 text-center text-white">
@@ -218,10 +222,12 @@ function ProductsSection() {
           <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="relative aspect-[16/10] md:aspect-auto">
-                <img
+                <Image
                   src="/images/soopreport.jpg"
                   alt="닥나무로 만든 수목 보고서"
-                  className="h-full w-full object-cover"
+                  fill
+                  sizes="(min-width: 768px) 576px, 100vw"
+                  className="object-cover"
                 />
               </div>
 
@@ -309,10 +315,12 @@ function ProductsSection() {
               </div>
             </div>
             <div className="relative aspect-[16/10] sm:aspect-auto">
-              <img
+              <Image
                 src="/images/soopsite.jpg"
                 alt="나무병원 홈페이지 예시"
-                className="h-full w-full object-cover"
+                fill
+                sizes="(min-width: 640px) 384px, 100vw"
+                className="object-cover"
               />
             </div>
           </article>
