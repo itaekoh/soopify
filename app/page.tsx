@@ -11,7 +11,7 @@ import { LandingHeader } from '@/components/landing-header'
 
 export const metadata: Metadata = {
   title: 'Soopify | 나무의사를 위한 AI 도구',
-  description: '나무병원 홈페이지 제작부터 수목 보고서 작성까지. 나무의사의 업무를 AI로 바꿉니다.',
+  description: '나무병원 홈페이지 제작부터 사진대지·수목 보고서 작성까지, Soopify 하나로 처리합니다.',
 }
 
 // InsightsSection 이 매 요청마다 DB 를 조회한다. 방문마다 새로 조회할 만큼
@@ -43,8 +43,8 @@ export default function Home() {
               나무의사의 일,<br />AI가 함께합니다.
             </h1>
             <p className="mt-6 max-w-xl text-lg text-white/80 md:text-xl">
-              홈페이지 제작부터 수목 보고서 작성까지.<br className="hidden md:block" />
-              현장 경험을 담은 두 가지 도구를 만들고 있습니다.
+              나무병원 홈페이지 제작부터 수목 보고서 작성까지.<br className="hidden md:block" />
+              나무의사의 현장 경험을 담아 만들고 있습니다.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <a href="#products" className="inline-flex items-center justify-center rounded-2xl bg-white px-8 py-4 text-sm font-semibold text-slate-950 hover:bg-slate-100">
@@ -216,19 +216,18 @@ function ProductsSection() {
           나무의사의 일을 돕는 도구
         </h2>
         <p className="mt-3 max-w-2xl text-base text-slate-600 dark:text-slate-300">
-          수목 보고서 작성을 중심으로 만들고 있습니다. 나무병원 홈페이지 제작도 준비 중입니다.
+          수목 조사부터 보고서 작성까지, Soopify 하나로 잇고 있습니다.
         </p>
 
-        {/* 서비스 중인 것과 아직 없는 것의 무게를 일부러 다르게 둔다.
-            같은 크기로 나란히 놓으면 둘 다 준비 중처럼 보인다. */}
         <div className="mt-10 space-y-5">
-          {/* 닥나무 — 주력 */}
+          {/* 유일한 제품. docnamu 브랜드를 버리고 app.soopify.com 으로 통합했으므로
+              "Soopify Workspace" 로 부른다. 로드맵은 이 카드 하단에서 보여준다. */}
           <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="relative aspect-[16/10] md:aspect-auto">
                 <Image
                   src="/images/soopreport.jpg"
-                  alt="닥나무로 만든 수목 보고서"
+                  alt="Soopify로 만든 수목 보고서"
                   fill
                   sizes="(min-width: 768px) 576px, 100vw"
                   className="object-cover"
@@ -240,7 +239,7 @@ function ProductsSection() {
                   <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                   진행 중
                 </span>
-                <h3 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">닥나무</h3>
+                <h3 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">Soopify Workspace</h3>
                 <p className="mt-2 text-sm font-semibold text-slate-500 dark:text-slate-400">
                   수목 조사 &rarr; 보고서 작성
                 </p>
@@ -248,14 +247,17 @@ function ProductsSection() {
                   현장 사진을 올리면 사진대지가 만들어집니다. 나무병원에서 쓰는 양식을
                   하나씩 더해, 최종적으로는 종합보고서까지 잇는 것을 목표로 합니다.
                 </p>
+                <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+                  나무병원 홈페이지 제작도 함께 문의해 주세요.
+                </p>
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                   <a
-                    href="https://app.docnamu.com"
+                    href="https://app.soopify.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-950 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200"
                   >
-                    app.docnamu.com
+                    Soopify Workspace
                     <span aria-hidden="true">&rarr;</span>
                   </a>
                   <a
@@ -293,39 +295,6 @@ function ProductsSection() {
                   </Fragment>
                 ))}
               </div>
-            </div>
-          </article>
-
-          {/* 나무병원 홈페이지 제작 — 준비 중이라 가볍게 */}
-          <article className="grid grid-cols-1 overflow-hidden rounded-3xl border border-slate-200 bg-white sm:grid-cols-3 dark:border-slate-800 dark:bg-slate-950">
-            <div className="flex flex-col justify-center p-8 sm:col-span-2 md:px-10">
-              <span className="w-fit rounded-full bg-slate-500/10 px-3 py-1 text-xs font-semibold text-slate-500 dark:text-slate-400">
-                준비 중
-              </span>
-              <h3 className="mt-3 text-xl font-semibold tracking-tight md:text-2xl">
-                나무병원 홈페이지 제작
-              </h3>
-              <p className="mt-2 text-base leading-relaxed text-slate-700 dark:text-slate-200">
-                병원 정보를 입력하면 AI가 홈페이지를 제작합니다. 전문 디자이너 없이도
-                신뢰감 있는 나무병원 웹사이트를 운영할 수 있습니다.
-              </p>
-              <div className="mt-5">
-                <a
-                  href="#contact"
-                  className="inline-flex items-center justify-center rounded-2xl border border-slate-200 px-6 py-3 text-sm font-semibold transition hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900"
-                >
-                  문의하기
-                </a>
-              </div>
-            </div>
-            <div className="relative aspect-[16/10] sm:aspect-auto">
-              <Image
-                src="/images/soopsite.jpg"
-                alt="나무병원 홈페이지 예시"
-                fill
-                sizes="(min-width: 640px) 384px, 100vw"
-                className="object-cover"
-              />
             </div>
           </article>
         </div>

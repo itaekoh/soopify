@@ -63,10 +63,10 @@ export function V20ContactSection() {
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest opacity-60">Contact</p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-                &ldquo;진단 이후&rdquo;를 함께 설계할 파트너를 찾습니다.
+                Soopify, 우리 나무병원에도 도입할 수 있을까요?
               </h2>
               <p className="mt-3 text-base opacity-90">
-                서비스 문의, 공동 프로젝트, 협업(파트너십) 모두 환영합니다.
+                Soopify 이용 문의는 물론, 나무병원 홈페이지 제작 문의도 환영합니다.
               </p>
             </div>
 

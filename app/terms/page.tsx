@@ -46,7 +46,7 @@ export default function TermsPage() {
             <Section title="제4조 (서비스의 제공 및 변경)">
               <p>회사는 다음과 같은 서비스를 제공합니다.</p>
               <ul className="mt-3 list-disc space-y-1 pl-5">
-                <li>수목 보고서 작성 지원 도구(닥나무) 안내 및 문의 접수</li>
+                <li>수목 보고서 작성 지원 도구(Soopify) 안내 및 문의 접수</li>
                 <li>나무병원 홈페이지 제작 서비스 안내 및 문의 접수</li>
                 <li>공지사항 등 정보 제공 게시판</li>
               </ul>
