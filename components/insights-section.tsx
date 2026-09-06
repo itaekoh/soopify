@@ -1,52 +1,27 @@
 // components/insights-section.tsx
-"use client"
-
-import { useEffect, useState } from "react"
 import Image from "next/image"
-
-type Insight = {
-  id: number
-  title: string
-  excerpt: string | null
-  content: string
-  featured_image_url: string | null
-  published_date: string
-  category_id: number
-  slug: string
-  sn_categories: {
-    slug: string
-  } | null
-}
+import { getFeaturedInsights } from "@/lib/insights"
 
 /** 랜딩에 노출할 글 수. 3열 한 행으로 맞춘다 — 6건이면 두 행이 되어
  *  섹션이 다른 섹션보다 훨씬 커진다. 전체는 블로그에서 본다. */
 const VISIBLE = 3
 
-export function InsightsSection() {
-  const [insights, setInsights] = useState<Insight[]>([])
-  const [loading, setLoading] = useState(true)
+// excerpt 또는 content에서 텍스트 추출 (HTML 태그 제거)
+function extractText(html: string, maxLength: number = 100): string {
+  const text = html.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim()
+  return text.length > maxLength ? text.substring(0, maxLength) + '...' : text
+}
 
-  useEffect(() => {
-    fetchInsights()
-  }, [])
-
-  async function fetchInsights() {
-    try {
-      const res = await fetch("/api/insights")
-      const data = await res.json()
-      setInsights((data.data || []).slice(0, VISIBLE))
-    } catch (err) {
-      console.error("Failed to fetch insights:", err)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  // excerpt 또는 content에서 텍스트 추출 (HTML 태그 제거)
-  function extractText(html: string, maxLength: number = 100): string {
-    const text = html.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim()
-    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text
-  }
+/**
+ * 서버 컴포넌트다. 예전에는 클라이언트에서 마운트 후 /api/insights 를
+ * fetch 했는데, 그 사이 "로딩 중..." 이 항상 한 번 노출됐고 크롤러는
+ * 빈 섹션만 보게 됐다. 데이터를 서버에서 직접 조회해 첫 렌더에 포함한다.
+ */
+export async function InsightsSection() {
+  const insights = await getFeaturedInsights(VISIBLE).catch((err) => {
+    console.error("Failed to fetch insights:", err)
+    return []
+  })
 
   // Products 와의 사이에는 구분선을 두지 않는다 — 섹션이 갈라져 보인다.
   // About/Products 는 배경색 차이로 이미 나뉘어 있다.
@@ -73,11 +48,7 @@ export function InsightsSection() {
           </a>
         </div>
 
-        {loading ? (
-          <div className="mt-10 text-center text-slate-500">
-            로딩 중...
-          </div>
-        ) : insights.length === 0 ? (
+        {insights.length === 0 ? (
           <div className="mt-10 text-center text-slate-500">
             아직 등록된 Insights가 없습니다.
           </div>

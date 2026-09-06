@@ -14,6 +14,10 @@ export const metadata: Metadata = {
   description: '나무병원 홈페이지 제작부터 수목 보고서 작성까지. 나무의사의 업무를 AI로 바꿉니다.',
 }
 
+// InsightsSection 이 매 요청마다 DB 를 조회한다. 방문마다 새로 조회할 만큼
+// 자주 바뀌는 데이터가 아니므로 5분 단위로만 갱신한다.
+export const revalidate = 300
+
 export default function Home() {
   return (
     <div className="bg-white text-slate-950 dark:bg-slate-950 dark:text-slate-50">
