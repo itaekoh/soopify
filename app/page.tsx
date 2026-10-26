@@ -178,31 +178,32 @@ function AboutSection() {
           </div>
         </div>
 
-        {/* 언론보도 — 전체 폭 띠. 기사가 늘면 아래로 쌓인다. */}
-        <div className="mt-10 space-y-3">
-          {PRESS.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${item.outlet} 기사 새 창에서 열기`}
-              className="group block rounded-2xl bg-slate-950 p-5 text-white transition hover:bg-slate-800 md:flex md:items-center md:gap-6 md:px-7 md:py-5 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-white"
-            >
-              <p className="text-xs font-semibold uppercase tracking-widest opacity-60 md:w-20 md:shrink-0">언론보도</p>
-              <p className="mt-2 min-w-0 text-base font-semibold leading-snug group-hover:underline md:mt-0 md:flex-1 md:text-lg">
-                {item.title}
-              </p>
-              <div className="mt-4 flex items-center justify-between gap-6 text-xs opacity-80 md:mt-0 md:shrink-0">
-                <span>
-                  {item.outlet} &middot; {item.date}
-                </span>
-                <span className="inline-flex items-center gap-1">
-                  기사 보기 <ArrowUpRight className="h-4 w-4" />
-                </span>
-              </div>
-            </a>
-          ))}
+        {/* 언론보도 — 한 패널 안의 목록. 기사가 늘어도 같은 모양으로 아래에 쌓인다. */}
+        <div className="mt-10 overflow-hidden rounded-2xl bg-slate-950 text-white dark:bg-slate-100 dark:text-slate-950">
+          <p className="px-5 pt-4 text-xs font-semibold uppercase tracking-widest opacity-60 md:px-7">언론보도</p>
+          <ul className="mt-2 divide-y divide-white/10 dark:divide-slate-950/10">
+            {PRESS.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${item.outlet} 기사 새 창에서 열기`}
+                  className="group flex flex-col gap-2 px-5 py-4 transition hover:bg-white/5 md:flex-row md:items-center md:gap-6 md:px-7 dark:hover:bg-slate-950/5"
+                >
+                  <span className="min-w-0 text-base font-semibold leading-snug group-hover:underline md:flex-1 md:text-lg">
+                    {item.title}
+                  </span>
+                  <span className="flex items-center justify-between gap-6 text-xs opacity-80 md:shrink-0">
+                    <span>
+                      {item.outlet} &middot; {item.date}
+                    </span>
+                    <ArrowUpRight className="h-4 w-4 shrink-0" />
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
