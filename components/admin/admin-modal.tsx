@@ -37,7 +37,7 @@ const SECTIONS: Section[] = [
   {
     id: "inquiries",
     label: "문의 관리",
-    description: "접수된 문의를 확인합니다.",
+    description: "접수된 문의를 확인하고 처리 상태를 관리합니다.",
     icon: MessageSquare,
     Panel: InquiriesPanel,
   },
