@@ -120,10 +120,11 @@ const CAREER = [
   },
 ] as const
 
-// 언론보도. 새 기사는 맨 위에 추가한다(최신순). 카드는 개수에 맞춰 자동으로 늘어난다.
+// 언론보도. 새 기사는 맨 위에 추가한다(최신순). mark 는 매체 로고 자리에 들어가는 짧은 글자.
 const PRESS = [
   {
     outlet: '日本経済新聞',
+    mark: '日経',
     date: '2026.02.22',
     title: '한국 고도인재의 창업, 5년간 2.5배 증가',
     href: 'https://www.nikkei.com/article/DGXZQOGM280Z30Y6A120C2000000/?gift=g2ls5pnSNwqjA0MTczMDQ2NjekOFpRSKAyAQ.8xe6mXsD',
@@ -178,10 +179,10 @@ function AboutSection() {
           </div>
         </div>
 
-        {/* 언론보도 — 한 패널 안의 목록. 기사가 늘어도 같은 모양으로 아래에 쌓인다. */}
-        <div className="mt-10 overflow-hidden rounded-2xl bg-slate-950 text-white dark:bg-slate-100 dark:text-slate-950">
-          <p className="px-5 pt-4 text-xs font-semibold uppercase tracking-widest opacity-60 md:px-7">언론보도</p>
-          <ul className="mt-2 divide-y divide-white/10 dark:divide-slate-950/10">
+        {/* 언론보도 — 데스크톱은 2열 카드. 기사 수가 홀수면 마지막 칸에 빈 카드를 둔다. */}
+        <div className="mt-10">
+          <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">Press</p>
+          <ul className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
             {PRESS.map((item) => (
               <li key={item.href}>
                 <a
@@ -189,20 +190,27 @@ function AboutSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${item.outlet} 기사 새 창에서 열기`}
-                  className="group flex flex-col gap-2 px-5 py-4 transition hover:bg-white/5 md:flex-row md:items-center md:gap-6 md:px-7 dark:hover:bg-slate-950/5"
+                  className="group flex h-full items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 transition hover:border-slate-300 dark:border-slate-800 dark:bg-slate-950 dark:hover:border-slate-700"
                 >
-                  <span className="min-w-0 text-base font-semibold leading-snug group-hover:underline md:flex-1 md:text-lg">
-                    {item.title}
+                  <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-slate-950 text-sm font-semibold tracking-tight text-white dark:bg-slate-100 dark:text-slate-950">
+                    {item.mark}
                   </span>
-                  <span className="flex items-center justify-between gap-6 text-xs opacity-80 md:shrink-0">
-                    <span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs font-semibold tabular-nums text-slate-500 dark:text-slate-400">
                       {item.outlet} &middot; {item.date}
-                    </span>
-                    <ArrowUpRight className="h-4 w-4 shrink-0" />
-                  </span>
+                    </p>
+                    <p className="mt-0.5 text-base font-semibold leading-snug group-hover:underline">{item.title}</p>
+                  </div>
+                  <ArrowUpRight className="h-4 w-4 shrink-0 text-slate-400 transition group-hover:translate-x-0.5 group-hover:text-slate-700 dark:group-hover:text-slate-200" />
                 </a>
               </li>
             ))}
+            {PRESS.length % 2 === 1 && (
+              <li
+                aria-hidden="true"
+                className="hidden rounded-2xl border border-dashed border-slate-300 md:block dark:border-slate-700"
+              />
+            )}
           </ul>
         </div>
       </div>
@@ -261,12 +269,18 @@ function ProductsSection() {
                   하나씩 더해, 최종적으로는 종합보고서까지 잇는 것을 목표로 합니다.
                 </p>
 
-                {/* 로드맵 — 세로 단계. 점 사이를 선으로 잇는다. */}
-                <ol className="mt-6 border-t border-slate-200 pt-5 dark:border-slate-800">
+                {/* 로드맵 — 모바일은 세로, 데스크톱은 가로 3칸. 점 사이를 선으로 잇는다. */}
+                <ol className="mt-6 border-t border-slate-200 pt-5 md:flex md:gap-4 dark:border-slate-800">
                   {roadmap.map((step, i) => (
-                    <li key={step.title} className="relative flex items-start gap-4 pb-5 last:pb-0">
+                    <li
+                      key={step.title}
+                      className="relative flex items-start gap-4 pb-5 last:pb-0 md:flex-1 md:flex-col md:gap-3 md:pb-0"
+                    >
                       {i < roadmap.length - 1 && (
-                        <span aria-hidden="true" className="absolute left-3 top-7 -bottom-1 w-0.5 bg-slate-200 dark:bg-slate-800" />
+                        <span
+                          aria-hidden="true"
+                          className="absolute left-3 top-7 -bottom-1 w-0.5 bg-slate-200 md:bottom-auto md:left-9 md:right-2 md:top-3 md:h-0.5 md:w-auto dark:bg-slate-800"
+                        />
                       )}
                       <span className={`relative inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${dotClass[step.tone]}`}>
                         <step.icon className="h-3.5 w-3.5" />
