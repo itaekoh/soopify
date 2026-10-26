@@ -63,8 +63,11 @@ export async function verifyPassword(password: string, stored: string): Promise<
 }
 
 // ─── DB 접근 ────────────────────────────────────────────────────────────────
-/** 저장된 관리자 계정. 테이블이 없거나 행이 없으면 null. */
-async function readCredentials(): Promise<Credentials | null> {
+/**
+ * 저장된 관리자 계정과 저장소 준비 여부를 한 번에 읽는다.
+ * ready: 테이블에 접근할 수 있는가 (마이그레이션 실행 여부). 행이 없는 것과 구분된다.
+ */
+async function loadCredentials(): Promise<{ row: Credentials | null; ready: boolean }> {
   try {
     const { data, error } = await supabaseAdmin
       .from(TABLE)
@@ -72,11 +75,34 @@ async function readCredentials(): Promise<Credentials | null> {
       .eq("id", 1)
       .maybeSingle()
 
-    if (error || !data) return null
-    return data as Credentials
+    if (error) return { row: null, ready: false }
+    const row = (data as Credentials | null) ?? null
+    if (row?.session_secret) cacheSessionSecret(row.session_secret)
+    return { row, ready: true }
   } catch {
-    return null
+    return { row: null, ready: false }
   }
+}
+
+/** 저장된 관리자 계정. 테이블이 없거나 행이 없으면 null. */
+async function readCredentials(): Promise<Credentials | null> {
+  return (await loadCredentials()).row
+}
+
+// ─── 서명 키 캐시 ───────────────────────────────────────────────────────────
+// 관리자 API 는 요청마다 인증을 확인하는데, 서명 키를 DB 에서 읽으면 조회 한 번이
+// 매 요청에 붙는다(Supabase 왕복 ~100-300ms). 키(session_secret)는 계정을 바꿔도
+// 유지되므로 인스턴스 메모리에 잠깐 들고 있는다. 계정 행을 쓰는 곳에서는 비운다.
+// 다른 인스턴스는 TTL 이 지나면 새 값을 읽는다.
+const SECRET_CACHE_MS = 5 * 60 * 1000
+let secretCache: { value: string; expiresAt: number } | null = null
+
+function cacheSessionSecret(value: string) {
+  secretCache = { value, expiresAt: Date.now() + SECRET_CACHE_MS }
+}
+
+function clearSecretCache() {
+  secretCache = null
 }
 
 /** 환경변수 값을 DB 에 심는다 (최초 1회). 실패해도 로그인 자체는 막지 않는다. */
@@ -92,17 +118,14 @@ async function seedCredentials(email: string, password: string): Promise<void> {
     if (error) console.error("관리자 계정 초기 저장 실패:", error.message)
   } catch (e) {
     console.error("관리자 계정 초기 저장 실패:", e)
+  } finally {
+    clearSecretCache()
   }
 }
 
 /** 계정 저장소를 쓸 수 있는지 (마이그레이션 실행 여부). */
 export async function credentialsStoreReady(): Promise<boolean> {
-  try {
-    const { error } = await supabaseAdmin.from(TABLE).select("id").limit(1)
-    return !error
-  } catch {
-    return false
-  }
+  return (await loadCredentials()).ready
 }
 
 // ─── 세션 토큰 ──────────────────────────────────────────────────────────────
@@ -113,6 +136,8 @@ export async function credentialsStoreReady(): Promise<boolean> {
 // DB 에 키가 생기면 환경변수 없이도 세션이 유지된다.
 async function signingKey(): Promise<string | null> {
   if (process.env.AUTH_SECRET) return process.env.AUTH_SECRET
+
+  if (secretCache && secretCache.expiresAt > Date.now()) return secretCache.value
 
   const row = await readCredentials()
   if (row?.session_secret) return row.session_secret
@@ -145,10 +170,13 @@ export function verifyToken(token: string, key: string, now = Date.now()): boole
 }
 
 // ─── 공개 API ───────────────────────────────────────────────────────────────
-/** 화면에 표시할 관리자 이메일. DB 우선, 없으면 씨앗값. */
-export async function adminEmail(): Promise<string | null> {
-  const row = await readCredentials()
-  return row?.email ?? SEED_EMAIL ?? null
+/**
+ * 관리자 화면 헤더에 표시할 정보. 조회 한 번으로 이메일(DB 우선, 없으면 씨앗값)과
+ * 계정 저장소 준비 여부를 함께 돌려준다.
+ */
+export async function adminSessionInfo(): Promise<{ email: string | null; canChangePassword: boolean }> {
+  const { row, ready } = await loadCredentials()
+  return { email: row?.email ?? SEED_EMAIL ?? null, canChangePassword: ready }
 }
 
 export async function verifyAdmin(email: string, password: string): Promise<boolean> {
@@ -218,6 +246,8 @@ export async function updateAdminCredentials(input: {
     session_secret: after?.session_secret ?? randomBytes(32).toString("hex"),
     updated_at: new Date().toISOString(),
   })
+
+  clearSecretCache()
 
   if (error) {
     console.error("관리자 계정 저장 실패:", error.message)

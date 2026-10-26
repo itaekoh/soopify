@@ -1,18 +1,19 @@
 // app/api/auth/check/route.ts
 import { NextResponse } from "next/server"
-import { isAuthenticated, adminEmail, credentialsStoreReady } from "@/lib/auth"
+import { isAuthenticated, adminSessionInfo } from "@/lib/auth"
 
 export async function GET() {
   try {
-    const authenticated = await isAuthenticated()
+    // 서로 의존하지 않으므로 함께 조회한다. 인증이 안 됐으면 결과는 버린다.
+    const [authenticated, info] = await Promise.all([isAuthenticated(), adminSessionInfo()])
 
     return NextResponse.json(
       {
         ok: true,
         authenticated,
         // 관리자 화면 헤더에 표시할 정보. 로그인한 경우에만 내려준다.
-        email: authenticated ? await adminEmail() : null,
-        canChangePassword: authenticated ? await credentialsStoreReady() : false,
+        email: authenticated ? info.email : null,
+        canChangePassword: authenticated ? info.canChangePassword : false,
       },
       {
         headers: {
