@@ -225,7 +225,7 @@ function ProductsSection() {
   } as const
 
   return (
-    <section id="products" className="py-16 md:py-20">
+    <section id="products" className="pt-16 pb-6 md:pt-20">  {/* 아래 Insights 가 자체 위 여백(py-16)을 가지므로 아래쪽은 줄인다 */}
       <div className="mx-auto max-w-6xl px-4">
         <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">Products</p>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
