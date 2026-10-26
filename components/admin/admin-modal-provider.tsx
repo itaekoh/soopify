@@ -27,13 +27,18 @@ type AdminModalContextValue = {
   closeModal: () => void
   /** 로그인/로그아웃 후 서버 상태를 다시 읽는다 */
   refresh: () => Promise<AdminSession>
+  /** URL(`?admin=inquiries`)로 지정된 첫 화면. 지정이 없으면 null (= 대시보드) */
+  initialSection: string | null
 }
 
 const EMPTY: AdminSession = { authenticated: false, email: null, canChangePassword: false }
 
 const AdminModalContext = createContext<AdminModalContextValue | null>(null)
 
-/** 관리자 모달을 열어둔 채로 진입할 때 쓰는 쿼리 파라미터 (`/?admin=1`) */
+/**
+ * 관리자 모달을 열어둔 채로 진입할 때 쓰는 쿼리 파라미터.
+ * `/?admin=1` 은 대시보드, `/?admin=inquiries` 처럼 섹션 id 를 주면 그 화면으로 연다.
+ */
 export const ADMIN_QUERY_KEY = "admin"
 
 export function AdminModalProvider({ children }: { children: ReactNode }) {
@@ -45,6 +50,7 @@ export function AdminModalProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [session, setSession] = useState<AdminSession>(EMPTY)
+  const [initialSection, setInitialSection] = useState<string | null>(null)
 
   const refresh = useCallback(async (): Promise<AdminSession> => {
     try {
@@ -75,20 +81,29 @@ export function AdminModalProvider({ children }: { children: ReactNode }) {
   // 바뀌므로 그때 다시 확인한다.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
-    if (params.get(ADMIN_QUERY_KEY) !== "1") return
+    const requested = params.get(ADMIN_QUERY_KEY)
+    if (!requested) return
 
+    setInitialSection(requested === "1" ? null : requested)
     setOpen(true)
     params.delete(ADMIN_QUERY_KEY)
     const query = params.toString()
     window.history.replaceState(null, "", query ? `${pathname}?${query}` : pathname)
   }, [pathname])
 
-  const openModal = useCallback(() => setOpen(true), [])
-  const closeModal = useCallback(() => setOpen(false), [])
+  // 헤더 톱니바퀴로 열면 항상 대시보드부터. URL 로 지정한 섹션은 그 진입에만 쓴다.
+  const openModal = useCallback(() => {
+    setInitialSection(null)
+    setOpen(true)
+  }, [])
+  const closeModal = useCallback(() => {
+    setInitialSection(null)
+    setOpen(false)
+  }, [])
 
   const value = useMemo(
-    () => ({ open, loading, session, openModal, closeModal, refresh }),
-    [open, loading, session, openModal, closeModal, refresh],
+    () => ({ open, loading, session, openModal, closeModal, refresh, initialSection }),
+    [open, loading, session, openModal, closeModal, refresh, initialSection],
   )
 
   return <AdminModalContext.Provider value={value}>{children}</AdminModalContext.Provider>

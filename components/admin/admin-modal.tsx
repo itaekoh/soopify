@@ -80,8 +80,12 @@ export function AdminModal() {
 
 function AdminModalContent() {
   const router = useRouter()
-  const { loading, session, closeModal, refresh } = useAdminModal()
-  const [section, setSection] = useState<SectionId>("dashboard")
+  const { loading, session, closeModal, refresh, initialSection } = useAdminModal()
+  // 모달은 열릴 때마다 새로 마운트되므로 초기값이 곧 첫 화면이다.
+  // URL 로 받은 값은 알려진 섹션일 때만 쓴다.
+  const [section, setSection] = useState<SectionId>(() =>
+    SECTIONS.some((s) => s.id === initialSection) ? (initialSection as SectionId) : "dashboard",
+  )
   const [navOpen, setNavOpen] = useState(false)
   const panelRef = useRef<HTMLDivElement>(null)
 
