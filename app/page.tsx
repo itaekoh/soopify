@@ -98,13 +98,13 @@ export default function Home() {
   )
 }
 
-// 이력. 항목을 추가하려면 이 배열에 한 줄을 더한다. image 가 없으면 mark 글자 타일이 나온다.
+// 이력. 항목을 추가하려면 이 배열에 한 항목을 더한다(사진 필수).
 const CAREER = [
   {
     period: '1997.04 – 2024.04',
     title: '대기업 IT 27년',
     detail: '프로젝트관리전문가(PMP) · KCC · LOTTE · SK · GS',
-    mark: '27',
+    image: '/images/it-career.jpg',
   },
   {
     period: '2024.05 – 2025.05',
@@ -161,12 +161,8 @@ function AboutSection() {
             <ul className="mt-2 divide-y divide-slate-200 dark:divide-slate-800">
               {CAREER.map((item) => (
                 <li key={item.period} className="flex items-center gap-4 py-4">
-                  <span className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-primary/10 text-xl font-semibold tracking-tight text-primary dark:border-slate-800">
-                    {'image' in item ? (
-                      <Image src={item.image} alt="" fill sizes="64px" className="object-cover" />
-                    ) : (
-                      item.mark
-                    )}
+                  <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800">
+                    <Image src={item.image} alt="" fill sizes="64px" className="object-cover" />
                   </span>
                   <div className="min-w-0">
                     <p className="text-xs font-semibold tabular-nums text-slate-500 dark:text-slate-400">{item.period}</p>
