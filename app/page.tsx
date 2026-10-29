@@ -120,16 +120,61 @@ const CAREER = [
   },
 ] as const
 
-// 언론보도. 새 기사는 맨 위에 추가한다(최신순). mark 는 매체 로고 자리에 들어가는 짧은 글자.
-const PRESS = [
+// 언론보도. 새 기사는 맨 위에 추가한다(최신순). logo 는 public/images/press 의 매체 로고.
+// href 는 기사 주소가 생기면 채운다. 없으면 링크 없는 카드로 나온다.
+type PressItem = { outlet: string; logo: string; date: string; title: string; href?: string }
+
+const PRESS: PressItem[] = [
+  {
+    outlet: '데일리투머로우',
+    logo: '/images/press/dailytw.png',
+    date: '2026.11.01',
+    title: '수목 진단과 IT 기술의 만남',
+  },
   {
     outlet: '日本経済新聞',
-    mark: '日経',
+    logo: '/images/press/nikkei.png',
     date: '2026.02.22',
     title: '한국 고도인재의 창업, 5년간 2.5배 증가',
     href: 'https://www.nikkei.com/article/DGXZQOGM280Z30Y6A120C2000000/?gift=g2ls5pnSNwqjA0MTczMDQ2NjekOFpRSKAyAQ.8xe6mXsD',
   },
 ]
+
+function PressCard({ item }: { item: PressItem }) {
+  const className =
+    'group flex h-full items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-950'
+  const body = (
+    <>
+      {/* 로고는 어두운 글자라 다크 모드에서도 칸은 항상 흰 배경 */}
+      <span className="relative h-16 w-28 shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white sm:w-32 dark:border-slate-700">
+        <Image src={item.logo} alt="" fill sizes="128px" className="object-contain p-3" />
+      </span>
+      <div className="min-w-0 flex-1">
+        <p className="text-xs font-semibold tabular-nums text-slate-500 dark:text-slate-400">
+          {item.outlet} &middot; {item.date}
+        </p>
+        <p className={`mt-0.5 text-base font-semibold leading-snug ${item.href ? 'group-hover:underline' : ''}`}>
+          {item.title}
+        </p>
+      </div>
+    </>
+  )
+
+  if (!item.href) return <div className={className}>{body}</div>
+
+  return (
+    <a
+      href={item.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${item.outlet} 기사 새 창에서 열기`}
+      className={`${className} transition hover:border-slate-300 dark:hover:border-slate-700`}
+    >
+      {body}
+      <ArrowUpRight className="h-4 w-4 shrink-0 text-slate-400 transition group-hover:translate-x-0.5 group-hover:text-slate-700 dark:group-hover:text-slate-200" />
+    </a>
+  )
+}
 
 function AboutSection() {
   return (
@@ -180,25 +225,8 @@ function AboutSection() {
           <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">Press</p>
           <ul className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
             {PRESS.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${item.outlet} 기사 새 창에서 열기`}
-                  className="group flex h-full items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 transition hover:border-slate-300 dark:border-slate-800 dark:bg-slate-950 dark:hover:border-slate-700"
-                >
-                  <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-slate-950 text-sm font-semibold tracking-tight text-white dark:bg-slate-100 dark:text-slate-950">
-                    {item.mark}
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-xs font-semibold tabular-nums text-slate-500 dark:text-slate-400">
-                      {item.outlet} &middot; {item.date}
-                    </p>
-                    <p className="mt-0.5 text-base font-semibold leading-snug group-hover:underline">{item.title}</p>
-                  </div>
-                  <ArrowUpRight className="h-4 w-4 shrink-0 text-slate-400 transition group-hover:translate-x-0.5 group-hover:text-slate-700 dark:group-hover:text-slate-200" />
-                </a>
+              <li key={item.title}>
+                <PressCard item={item} />
               </li>
             ))}
             {PRESS.length % 2 === 1 && (
