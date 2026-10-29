@@ -272,13 +272,13 @@ function ProductsSection() {
           {/* 유일한 제품. app.soopify.com 으로 통합했으므로 "Soopify Workspace" 로 부른다. */}
           <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
             <div className="grid grid-cols-1 md:grid-cols-2">
-              <div className="relative aspect-[16/9] md:aspect-auto">
+              <div className="relative aspect-[4/3] md:aspect-auto">
                 <Image
-                  src="/images/soopreport.jpg"
-                  alt="Soopify로 만든 수목 보고서"
+                  src="/images/soopify-workspace.jpg"
+                  alt="노트북 화면에 열린 Soopify Workspace"
                   fill
                   sizes="(min-width: 768px) 576px, 100vw"
-                  className="object-cover"
+                  className="object-cover object-[50%_85%]"
                 />
               </div>
 
