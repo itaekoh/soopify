@@ -269,13 +269,13 @@ function ProductsSection() {
         </p>
 
         <div className="mt-10">
-          {/* 유일한 제품. app.soopify.com 으로 통합했으므로 "Soopify Workspace" 로 부른다. */}
+          {/* 유일한 제품. app.soopify.com 으로 통합했으므로 "Soopify Log" 로 부른다. */}
           <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="relative aspect-[4/3] md:aspect-auto">
                 <Image
-                  src="/images/soopify-workspace.jpg"
-                  alt="노트북 화면에 열린 Soopify Workspace"
+                  src="/images/soopify-log.jpg"
+                  alt="노트북 화면에 열린 Soopify Log"
                   fill
                   sizes="(min-width: 768px) 576px, 100vw"
                   className="object-cover object-[50%_85%]"
@@ -287,7 +287,7 @@ function ProductsSection() {
                   <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                   진행 중
                 </span>
-                <h3 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">Soopify Workspace</h3>
+                <h3 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">Soopify Log</h3>
                 <p className="mt-4 text-base leading-relaxed text-slate-700 dark:text-slate-200">
                   현장 사진을 올리면 사진대지가 만들어집니다. 나무병원에서 쓰는 양식을
                   하나씩 더해, 최종적으로는 종합보고서까지 잇는 것을 목표로 합니다.
@@ -327,7 +327,7 @@ function ProductsSection() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-950 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200"
                   >
-                    Soopify Workspace
+                    Soopify Log
                     <span aria-hidden="true">&rarr;</span>
                   </a>
                   <a
