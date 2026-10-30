@@ -122,7 +122,8 @@ const CAREER = [
 
 // 언론보도. 새 기사는 맨 위에 추가한다(최신순). logo 는 public/images/press 의 매체 로고.
 // href 는 기사 주소가 생기면 채운다. 없으면 링크 없는 카드로 나온다.
-type PressItem = { outlet: string; logo: string; date: string; title: string; href?: string }
+// logo 가 없으면 로고 칸에 매체 이름 글자가 들어간다.
+type PressItem = { outlet: string; logo?: string; date: string; title: string; href?: string }
 
 const PRESS: PressItem[] = [
   {
@@ -130,6 +131,13 @@ const PRESS: PressItem[] = [
     logo: '/images/press/dailytw.png',
     date: '2026.11.01',
     title: '수목 진단과 IT 기술의 만남',
+  },
+  {
+    outlet: '머니투데이',
+    logo: '/images/press/moneytoday.svg',
+    date: '2026.10.29',
+    title: '\'나무진료·노무·수선\' 판 바꾸는 성북구 스타트업',
+    href: 'https://www.mt.co.kr/policy/2026/10/29/2026102916470798034',
   },
   {
     outlet: '日本経済新聞',
@@ -146,8 +154,12 @@ function PressCard({ item }: { item: PressItem }) {
   const body = (
     <>
       {/* 로고는 어두운 글자라 다크 모드에서도 칸은 항상 흰 배경 */}
-      <span className="relative h-16 w-28 shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white sm:w-32 dark:border-slate-700">
-        <Image src={item.logo} alt="" fill sizes="128px" className="object-contain p-3" />
+      <span className="relative flex h-16 w-28 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-white sm:w-32 dark:border-slate-700">
+        {item.logo ? (
+          <Image src={item.logo} alt="" fill sizes="128px" className="object-contain p-3" />
+        ) : (
+          <span className="px-2 text-center text-sm font-semibold tracking-tight text-slate-800">{item.outlet}</span>
+        )}
       </span>
       <div className="min-w-0 flex-1">
         <p className="text-xs font-semibold tabular-nums text-slate-500 dark:text-slate-400">
