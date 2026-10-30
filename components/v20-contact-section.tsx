@@ -66,7 +66,7 @@ export function V20ContactSection() {
                 Soopify, 편하게 문의해 주세요.
               </h2>
               <p className="mt-3 text-base opacity-90">
-                Soopify Log 도입, 나무병원 홈페이지 제작, 제휴 제안까지 모두 환영합니다.
+                Soopify Tree 도입, 나무병원 홈페이지 제작, 제휴 제안까지 모두 환영합니다.
               </p>
             </div>
 
