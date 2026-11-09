@@ -129,8 +129,9 @@ const PRESS: PressItem[] = [
   {
     outlet: '데일리투머로우',
     logo: '/images/press/dailytw.png',
-    date: '2026.11.01',
+    date: '2026.11.09',
     title: '수목 진단과 IT 기술의 만남',
+    href: 'https://www.dailytw.kr/news/articleView.html?idxno=31768',
   },
   {
     outlet: '머니투데이',
