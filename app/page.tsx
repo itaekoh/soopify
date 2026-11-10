@@ -103,7 +103,7 @@ const CAREER = [
   {
     period: '1997.04 – 2024.04',
     title: '대기업 IT 27년',
-    detail: '프로젝트관리전문가(PMP) · KCC · LOTTE · SK · GS',
+    detail: '프로젝트관리전문가(PMP)',
     image: '/images/it-career.jpg',
   },
   {
