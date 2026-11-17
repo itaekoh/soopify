@@ -145,6 +145,7 @@ const PRESS: PressItem[] = [
     // 기사 전체 제목은 "창업 유니콘에 도전하는 성북구 1인 창조기업 지원센터 우수기업 (1)"
     // 인데 회사 이름이 들어가지 않아, 본문에서 수피파이를 소개한 소제목을 그대로 썼다.
     outlet: 'IT동아',
+    logo: '/images/press/itdonga.png',
     date: '2026.10.28',
     title: '나무의사가 IT 기술로 나무를 돌보는 수목 진단 플랫폼, \'수피파이\'',
     href: 'https://it.donga.com/109787/',
